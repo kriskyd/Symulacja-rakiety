@@ -1,0 +1,122 @@
+---------------------------
+Silnik na paliwo sta³e nr 1
+---------------------------
+4-segment SRB (Solid Rocket Booster) - u¿yty w locie Space Shuttle:
+masa ca³kowita:			590 000 kg
+masa paliwa:			500 000 kg
+masa modu³u:	 		90 000 kg
+
+odrzut / thrust:		12 000 kN
+burn rate / czas spalania:	127 s
+masa paliwa na sekundê:		~4000 kg/s
+paliwo:				PBAN / APCP
+rozwiniêcie skrótu		polybutadiene acrylonitrile
+po angielsku:			/ ammonium perchlorate composite propellant
+
+specific impulse at sea level	242 s / 2.37 km/s
+Isp in vacuum			268 s / 2.63 km/s
+
+dodatkowo:
+praktyczne wartoœci odrzutu T uzyskanego w czasie s¹ na wykresie:
+https://en.wikipedia.org/wiki/Space_Shuttle_Solid_Rocket_Booster#Ignition
+
+---------------------------
+Silnik na paliwo sta³e nr 2
+---------------------------
+5-segment SRB (Solid Rocket Booster) - u¿yty w locie Space Launch System:
+masa ca³kowita:			710 000 kg (wg masy paliwa poni¿ej
+masa paliwa:			625 000 kg (+25% -> Ÿród³o: 
+https://www.nasa.gov/sites/default/files/atoms/files/8690_sls_solid_rocket_booster_fact_sheetfinal03072015_508.pdf
+masa modu³u:	 		85 270 kg
+
+odrzut / thrust:		16 000 kN
+burn rate / czas spalania:	124 s
+masa paliwa na sekundê:		 ~5000 kg/s
+paliwo:				PBAN / APCP
+rozwiniêcie skrótu		polybutadiene acrylonitrile
+po angielsku:			/ ammonium perchlorate composite propellant
+
+specific impulse at sea level	-
+Isp in vacuum			269 s / 2.64 km/s
+
+---------------------------
+Zbiornik na paliwo ciek³e:
+---------------------------
+ET (external tank) - u¿ywany powszechnie w lotach:
+masa ca³kowita:			~760 000 kg
+masa paliwa:			~106 000 kg
+masa utleniacza (LOX):		~630 000 kg
+masa modu³u:			  26 500 kg
+
+---------------------------
+Silnik na paliwo ciek³e nr 1
+---------------------------
+RD-170
+
+masa modu³u:			10 750 kg
+
+odrzut (SL):			7 904 kN
+odrzut (vac.):			7 257 kN
+burn rate / czas spalania:	-
+masa paliwa na sekundê:		-
+paliwo:				RP-1 / LOX (oxydizer)
+znaczenie			refined petroleum-1
+po angielsku:			/ liquid oxygen (utleniacz)
+
+Isp (SL):			309 s / 3.03 km/s
+Isp (vac.):			337 s / 3.30 km/s
+
+---------------------------
+Silnik na paliwo ciek³e nr 2
+---------------------------
+RD-180
+
+masa modu³u:			5 480 kg
+
+odrzut (SL):			3 830 kN
+odrzut (vac.):			4 150 kN
+burn rate / czas spalania:	-
+masa paliwa na sekundê:		-
+paliwo:				RP-1 / LOX (oxydizer)
+znaczenie			refined petroleum-1
+po angielsku:			/ liquid oxygen (utleniacz)
+
+Isp (SL):			311 s / 3.05 km/s
+Isp (vac.):			338 s / 3.31 km/s
+
+---------------------------
+Silnik na paliwo ciek³e nr 3
+---------------------------
+RS-25 (Aerojet Rocketdyne) u¿yty w locie Space Shuttle (u¿yto 3 silników)
+
+masa modu³u:			3 500 kg
+
+odrzut (SL):			1 860 kN
+odrzut (vac.):			2 279 kN
+burn rate / czas spalania:	-
+masa paliwa na sekundê:		-
+paliwo:				LH2 / LOX (oxydizer)
+znaczenie			liquid hydrogen
+po angielsku:			/ liquid oxygen (utleniacz)
+
+Isp (SL):			366 s / 3.59 km/s
+Isp (vac.):			452 s / 4.43 km/s
+
+---------------------------
+Silnik na paliwo ciek³e nr 4
+---------------------------
+RS-25D (Aerojet Rocketdyne) u¿yty w locie Space Launch System (u¿yto 4 silników)
+
+masa modu³u:			3 500 kg (prawdopodobnie bez wiêkszych zmian)
+
+odrzut (SL):			-
+odrzut (vac.):			7 440 kN (prawdopodobnie ca³kowity dla 4 silników)
+burn rate / czas spalania:	-
+masa paliwa na sekundê:		-
+paliwo:				LH2 / LOX (oxydizer)
+znaczenie			liquid hydrogen
+po angielsku:			/ liquid oxygen (utleniacz)
+
+Isp (SL):			363 s / 3.56 km/s
+Isp (vac.):			452 s / 4.43 km/s
+
