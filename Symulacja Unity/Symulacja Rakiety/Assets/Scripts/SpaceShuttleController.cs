@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,85 +7,191 @@ public enum SpaceShuttleState { Idle, Started, Moving };
 
 public class SpaceShuttleController : MonoBehaviour
 {
-	public SpaceShuttleState state = SpaceShuttleState.Idle;
-	public double force = 12500000;
-	public double mass = 1000;
-	public double height = 0;
-	public double velocity = 0;
-	public double acceleration = 0;
-	public float time;
-	public List<Engine> engines;
+    public SpaceShuttleState state = SpaceShuttleState.Idle;
+    public double force = 12500000;
+    public double mass = 1000;
+    public double massEngine;
+    public double height = 0;
+    public double velocity = 0;
+    public double acceleration = 0;
+    public float time;
+    public List<Engine> engines;
+    public Planet planet;
+    public static double G = 6.67 * Mathf.Pow(10, -11);
 
-	[SerializeField]
-	private int _MainEnginesCount;
-	public int MainEnginesCount
-	{
-		get { return _MainEnginesCount; }
-		set
-		{
-			_MainEnginesCount = value;
-			ChangeRocketParts();
-		}
-	}
-	[SerializeField]
-	private int _SRBsCount;
-	public int SRBsCount
-	{
-		get { return _SRBsCount; }
-		set
-		{
-			_SRBsCount = value;
-			ChangeRocketParts ();
-		}
-	}
+    public double gravity = 0;
+    public double massALL = 0;
+    public double massGassOut = 0;
+    public double massGAssOutALL = 0;
+    public float myTime = 0;
+    public float maxTime = 4;
+    public bool isEmpty = false;
 
-	void Start ()
-	{
+    [SerializeField]
+    private int _MainEnginesCount;
+    public int MainEnginesCount
+    {
+        get { return _MainEnginesCount; }
+        set
+        {
+            _MainEnginesCount = value;
+            ChangeRocketParts();
+        }
+    }
+    [SerializeField]
+    private int _SRBsCount;
+    public int SRBsCount
+    {
+        get { return _SRBsCount; }
+        set
+        {
+            _SRBsCount = value;
+            ChangeRocketParts();
+        }
+    }
 
-	}
+    void Start()
+    {
 
-	void Update ()
-	{
+    }
 
-		switch (state)
-		{
-			case SpaceShuttleState.Idle:
-				GetIdleInput ();
-				break;
-			case SpaceShuttleState.Started:
-				state = SpaceShuttleState.Moving;
-				break;
+    void Update()
+    {
 
-			case SpaceShuttleState.Moving:
-				UpdateMath ();
-				UpdatePosition ();
-				break;
-		}
+        switch (state)
+        {
+            case SpaceShuttleState.Idle:
+                GetIdleInput();
+                break;
+            case SpaceShuttleState.Started:
+                state = SpaceShuttleState.Moving;
+                break;
 
-	}
+            case SpaceShuttleState.Moving:
+                if (engines.Count > 0)
+                {
+                    UpdateMath();
+                    UpdatePosition();
+                }
+                else
+                {
+                    Debug.Log("koniec");
+                    UpdateMathWithoutEngine();
+                    UpdatePosition();
+                }
+                break;
+        }
 
-	private void GetIdleInput ()
-	{
-		if (Input.GetKeyDown (KeyCode.Space))
-			state = SpaceShuttleState.Started;
-	}
+    }
 
-	private void UpdateMath ()
-	{
-		acceleration = force / mass;
-		velocity = velocity + acceleration * Time.deltaTime;
-		height = height + velocity * Time.deltaTime + 0.5 * acceleration * Time.deltaTime * Time.deltaTime;
-		time += Time.deltaTime;
-	}
+    private void CalculateGravity(double height)
+    {
+        gravity = (G * planet.MASS) / ((planet.RADIUS + height) * (planet.RADIUS + height));
+    }
 
-	private void UpdatePosition ()
-	{
-		transform.position = Vector3.up * (float) height;
-	}
+    private void CalculateMassGassOut(Engine engine)
+    {
+        massGassOut = engine.thrustVac / engine.ispSL;
+    }
 
-	private void ChangeRocketParts ()
-	{
-		// manage visible rocket parts
-	}
+    private void GetIdleInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+
+            foreach (var engine in engines)
+            {
+                massEngine += engine.MassTotal;
+            }
+
+            //obliczanie masy i promienia planety
+            planet.CalculateAllMassANDRadius();
+
+            //wyznaczenie początkowej grawitacji
+            CalculateGravity(this.height);
+
+            //całkowita masa
+            massALL = mass + massEngine;
+
+            state = SpaceShuttleState.Started;
+        }
+    }
+
+    private void UpdateMath()
+    {
+        CalculateGravity(height);
+
+        if (massGAssOutALL < engines[0].fuelMass)
+        {
+            velocity = -gravity * Time.deltaTime + engines[0].ispSL * Mathf.Log(2.71828f, (float)(massALL / (massALL - massGassOut * Time.deltaTime)));
+            height = height + velocity * Time.deltaTime
+                + 0.5 * gravity * Time.deltaTime * Time.deltaTime
+                + engines[0].ispSL * (1 / (-massGassOut)) * (massALL + (massALL - massGassOut * Time.deltaTime) * (Mathf.Log(2.71828f, (float)((massALL - massGassOut * Time.deltaTime) / massALL) - 1)));
+            var xmas = massGassOut * Time.deltaTime;
+                massGAssOutALL += xmas;
+            massALL -= xmas;
+        }
+        else
+        {
+            Debug.Log("IIIIIIIIIIISSSSSSSSSSSSS  " + isEmpty);
+            if (!isEmpty)
+            {
+
+                velocity = -gravity * Time.deltaTime + engines[0].ispSL * Mathf.Log(2.71828f, (float)(massALL / (massALL - engines[0].mass)));
+                height = height + velocity * Time.deltaTime
+                    + 0.5 * gravity * Time.deltaTime * Time.deltaTime
+                    + engines[0].ispSL  * (massALL + (massALL - engines[0].mass) * (Mathf.Log(2.71828f, (float)((massALL - massGassOut * Time.deltaTime) / massALL) - 1)));
+                isEmpty = true;
+            }
+            else
+            {
+                
+                height = height + velocity * Time.deltaTime
+                   + 0.5 * gravity * Time.deltaTime * Time.deltaTime;
+
+            }
+
+            //rakieta musi odrzucić silnik
+            myTime += Time.deltaTime;
+            if (myTime >= maxTime)
+            {
+                Debug.Log("ZZERO");
+
+                //inna masa do odrzucenia
+                massALL -= engines[0].mass;
+                isEmpty = false;
+
+                //usuawamy wykorzystany silnik
+                engines.Remove(engines[0]);
+
+                //trzeba policzyć na nowo prędkość wystrzeliwanego paliwa bo inny silnik
+                CalculateMassGassOut(engines[0]);
+                myTime = 0;
+                massGAssOutALL = 0;
+
+
+            }
+
+        }
+
+
+
+        time += Time.deltaTime;
+    }
+
+    public void UpdateMathWithoutEngine()
+    {
+        CalculateGravity(height);
+    }
+
+    private void UpdatePosition()
+    {
+        transform.position = Vector3.up * (float)height;
+    }
+
+    private void ChangeRocketParts()
+    {
+        // manage visible rocket parts
+    }
 
 }

@@ -12,6 +12,7 @@ public class Engine : RocketPart
 	public double ispSL;
 	public double ispVac;
 	public double thrustVac;
+    public double thrustSL;
 
 	public double fuelMass;
 	public double MassTotal { get { return fuelMass + mass; } }
