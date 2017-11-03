@@ -13,6 +13,30 @@ public class SpaceShuttleController : MonoBehaviour
 	public double velocity = 0;
 	public double acceleration = 0;
 	public float time;
+	public List<Engine> engines;
+
+	[SerializeField]
+	private int _MainEnginesCount;
+	public int MainEnginesCount
+	{
+		get { return _MainEnginesCount; }
+		set
+		{
+			_MainEnginesCount = value;
+			ChangeRocketParts();
+		}
+	}
+	[SerializeField]
+	private int _SRBsCount;
+	public int SRBsCount
+	{
+		get { return _SRBsCount; }
+		set
+		{
+			_SRBsCount = value;
+			ChangeRocketParts ();
+		}
+	}
 
 	void Start ()
 	{
@@ -26,10 +50,8 @@ public class SpaceShuttleController : MonoBehaviour
 		{
 			case SpaceShuttleState.Idle:
 				GetIdleInput ();
-
 				break;
 			case SpaceShuttleState.Started:
-				acceleration = force / mass;
 				state = SpaceShuttleState.Moving;
 				break;
 
@@ -49,6 +71,7 @@ public class SpaceShuttleController : MonoBehaviour
 
 	private void UpdateMath ()
 	{
+		acceleration = force / mass;
 		velocity = velocity + acceleration * Time.deltaTime;
 		height = height + velocity * Time.deltaTime + 0.5 * acceleration * Time.deltaTime * Time.deltaTime;
 		time += Time.deltaTime;
@@ -57,6 +80,11 @@ public class SpaceShuttleController : MonoBehaviour
 	private void UpdatePosition ()
 	{
 		transform.position = Vector3.up * (float) height;
+	}
+
+	private void ChangeRocketParts ()
+	{
+		// manage visible rocket parts
 	}
 
 }
