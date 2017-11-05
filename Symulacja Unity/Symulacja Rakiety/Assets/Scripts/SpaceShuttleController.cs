@@ -26,6 +26,7 @@ public class SpaceShuttleController : MonoBehaviour
     public float myTime = 0;
     public float maxTime = 4;
     public bool isEmpty = false;
+	public float time2=0;
 
     [SerializeField]
     private int _MainEnginesCount;
@@ -110,6 +111,10 @@ public class SpaceShuttleController : MonoBehaviour
             //wyznaczenie początkowej grawitacji
             CalculateGravity(this.height);
 
+
+			//policznie predkości z jaką pozbywan ajest masa w spliku
+			CalculateMassGassOut(engines[0]);
+
             //całkowita masa
             massALL = mass + massEngine;
 
@@ -123,11 +128,12 @@ public class SpaceShuttleController : MonoBehaviour
 
         if (massGAssOutALL < engines[0].fuelMass)
         {
-            velocity = -gravity * Time.deltaTime + engines[0].ispSL * Mathf.Log(2.71828f, (float)(massALL / (massALL - massGassOut * Time.deltaTime)));
-            height = height + velocity * Time.deltaTime
-                + 0.5 * gravity * Time.deltaTime * Time.deltaTime
-                + engines[0].ispSL * (1 / (-massGassOut)) * (massALL + (massALL - massGassOut * Time.deltaTime) * (Mathf.Log(2.71828f, (float)((massALL - massGassOut * Time.deltaTime) / massALL) - 1)));
-            var xmas = massGassOut * Time.deltaTime;
+			time2 = Time.deltaTime * 100;
+			velocity = -gravity * time2 + engines[0].ispSL * Mathf.Log(2.71828f, (float)(massALL / (massALL - massGassOut * time2)));
+			height = height + velocity * time2
+				+ 0.5 * gravity * time2 * time2
+				+ engines[0].ispSL * (1 / (-massGassOut)) * (massALL + (massALL - massGassOut * time2) * (Mathf.Log(2.71828f, (float)((massALL - massGassOut * time2) / massALL) - 1)));
+			var xmas = massGassOut * time2;
                 massGAssOutALL += xmas;
             massALL -= xmas;
         }
