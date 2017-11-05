@@ -27,6 +27,10 @@ public class SpaceShuttleController : MonoBehaviour
     public float maxTime = 4;
     public bool isEmpty = false;
 	public float time2=0;
+	public double a1;
+	public double a2;
+	public double a3;
+	public double a4;
 
     [SerializeField]
     private int _MainEnginesCount;
@@ -92,7 +96,7 @@ public class SpaceShuttleController : MonoBehaviour
 
     private void CalculateMassGassOut(Engine engine)
     {
-        massGassOut = engine.thrustVac / engine.ispSL;
+        massGassOut = engine.thrustSL / engine.ispSL;
     }
 
     private void GetIdleInput()
@@ -129,65 +133,74 @@ public class SpaceShuttleController : MonoBehaviour
         if (massGAssOutALL < engines[0].fuelMass)
         {
 			time2 = Time.deltaTime * 100;
-			velocity = -gravity * time2 + engines[0].ispSL * Mathf.Log(2.71828f, (float)(massALL / (massALL - massGassOut * time2)));
-			height = height + velocity * time2
-				+ 0.5 * gravity * time2 * time2
-				+ engines[0].ispSL * (1 / (-massGassOut)) * (massALL + (massALL - massGassOut * time2) * (Mathf.Log(2.71828f, (float)((massALL - massGassOut * time2) / massALL) - 1)));
+
+			a1 = engines [0].ispSL;
+			a2 = massALL / (massALL - massGassOut * time2);
+				a3 = Math.Log(a2);
+				a4 = -gravity *time2 + a1*a3;
 			var xmas = massGassOut * time2;
-                massGAssOutALL += xmas;
-            massALL -= xmas;
+			massGAssOutALL += xmas;
+
+			velocity = -gravity * time2 + engines [0].ispSL * Math.Log (massALL / (massALL - massGAssOutALL));
+
+
+
+			height = height + velocity * time2
+				- 0.5 * gravity * time2 * time2
+				+ engines[0].ispSL * (1 / (-massGassOut)) * (massALL + (massALL - massGassOut * time2) * (Math.Log( (double)((massALL - massGAssOutALL) / massALL)) - 1));
+			
         }
         else
         {
+			isEmpty = true;
             Debug.Log("IIIIIIIIIIISSSSSSSSSSSSS  " + isEmpty);
-            if (!isEmpty)
+            if (isEmpty)
             {
+				time2 = Time.deltaTime * 100;
+				velocity = -gravity * time2 + engines[0].ispSL * Math.Log((massALL / (massALL - engines[0].MassTotal)));
+				height = height + velocity * time2
+					- 0.5 * gravity * time2 * time2
+					+ engines [0].ispSL  *Math.Log ((massALL / (massALL - engines [0].MassTotal))) * time2;
 
-                velocity = -gravity * Time.deltaTime + engines[0].ispSL * Mathf.Log(2.71828f, (float)(massALL / (massALL - engines[0].mass)));
-                height = height + velocity * Time.deltaTime
-                    + 0.5 * gravity * Time.deltaTime * Time.deltaTime
-                    + engines[0].ispSL  * (massALL + (massALL - engines[0].mass) * (Mathf.Log(2.71828f, (float)((massALL - massGassOut * Time.deltaTime) / massALL) - 1)));
-                isEmpty = true;
-            }
-            else
-            {
-                
-                height = height + velocity * Time.deltaTime
-                   + 0.5 * gravity * Time.deltaTime * Time.deltaTime;
+				Debug.Log("ZZERO");
 
+				//inna masa do odrzucenia i odejmuejmy masę zrzytego paliwa
+				massALL -= engines[0].MassTotal; //masa paliwa i modułu
+				isEmpty = false;
+
+				//usuawamy wykorzystany silnik
+				engines.Remove(engines[0]);
+
+				if (engines.Count > 0) {//trzeba policzyć na nowo prędkość wystrzeliwanego paliwa bo inny silnik
+					CalculateMassGassOut (engines [0]);
+				}
+				myTime = 0;
+				massGAssOutALL = 0;
             }
 
             //rakieta musi odrzucić silnik
-            myTime += Time.deltaTime;
-            if (myTime >= maxTime)
-            {
-                Debug.Log("ZZERO");
-
-                //inna masa do odrzucenia
-                massALL -= engines[0].mass;
-                isEmpty = false;
-
-                //usuawamy wykorzystany silnik
-                engines.Remove(engines[0]);
-
-                //trzeba policzyć na nowo prędkość wystrzeliwanego paliwa bo inny silnik
-                CalculateMassGassOut(engines[0]);
-                myTime = 0;
-                massGAssOutALL = 0;
+          //  myTime += Time.deltaTime;
+          //  if (myTime >= maxTime)
+         //   {
+              
 
 
-            }
+          //  }
 
         }
 
 
 
-        time += Time.deltaTime;
+    //    time += Time.deltaTime;
     }
 
     public void UpdateMathWithoutEngine()
     {
         CalculateGravity(height);
+		time2 = Time.deltaTime * 100;
+		height = height + velocity * time2
+			- 0.5 * gravity * time2 * time2;
+		
     }
 
     private void UpdatePosition()
