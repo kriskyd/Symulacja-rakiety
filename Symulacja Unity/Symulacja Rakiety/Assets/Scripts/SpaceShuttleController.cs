@@ -16,6 +16,7 @@ public class SpaceShuttleController : MonoBehaviour
     public double acceleration = 0;
     public float time;
     public List<Engine> engines;
+	public FuelTank externalTank;
     public Planet planet;
     public static double G = 6.67 * Mathf.Pow(10, -11);
 
@@ -62,7 +63,7 @@ public class SpaceShuttleController : MonoBehaviour
 
     void Update()
     {
-
+		time += Time.deltaTime;
         switch (state)
         {
             case SpaceShuttleState.Idle:
@@ -120,7 +121,7 @@ public class SpaceShuttleController : MonoBehaviour
 			CalculateMassGassOut(engines[0]);
 
             //całkowita masa
-            massALL = mass + massEngine;
+            massALL = mass + massEngine + externalTank.MassTotal;
 
             state = SpaceShuttleState.Started;
         }
@@ -130,9 +131,9 @@ public class SpaceShuttleController : MonoBehaviour
     {
         CalculateGravity(height);
 
-        if (massGAssOutALL < engines[0].fuelMass)
+        if (massGAssOutALL < externalTank.mainEngineFuelMass)
         {
-			time2 = Time.deltaTime * 100;
+			time2 = Time.deltaTime ;
 
 			a1 = engines [0].ispSL;
 			a2 = massALL / (massALL - massGassOut * time2);
@@ -145,10 +146,10 @@ public class SpaceShuttleController : MonoBehaviour
 
 
 
-			height = height + velocity * time2
-				- 0.5 * gravity * time2 * time2
-				+ engines[0].ispSL * (1 / (-massGassOut)) * (massALL + (massALL - massGassOut * time2) * (Math.Log( (double)((massALL - massGAssOutALL) / massALL)) - 1));
-			
+			height = -(engines [0].ispSL * time
+				- 0.5 * gravity * time * time
+				+ engines[0].ispSL * (time - massALL / massGassOut) * Math.Log (massALL / (massALL - massGassOut * time)));
+			print (engines [0].ispSL * (time - massALL / massGassOut) * Math.Log (massALL / (massALL - massGassOut * time)));
         }
         else
         {
@@ -156,7 +157,7 @@ public class SpaceShuttleController : MonoBehaviour
             Debug.Log("IIIIIIIIIIISSSSSSSSSSSSS  " + isEmpty);
             if (isEmpty)
             {
-				time2 = Time.deltaTime * 100;
+				time2 = Time.deltaTime ;
 				velocity = -gravity * time2 + engines[0].ispSL * Math.Log((massALL / (massALL - engines[0].MassTotal)));
 				height = height + velocity * time2
 					- 0.5 * gravity * time2 * time2
@@ -197,7 +198,7 @@ public class SpaceShuttleController : MonoBehaviour
     public void UpdateMathWithoutEngine()
     {
         CalculateGravity(height);
-		time2 = Time.deltaTime * 100;
+		time2 = Time.deltaTime ;
 		height = height + velocity * time2
 			- 0.5 * gravity * time2 * time2;
 		

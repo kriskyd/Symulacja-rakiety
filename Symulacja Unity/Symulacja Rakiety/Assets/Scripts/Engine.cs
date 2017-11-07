@@ -16,7 +16,7 @@ public class Engine : RocketPart
 
 	public double fuelMass;
 	public double MassTotal { get { return fuelMass + mass; } }
-
+	
 
 	void Start ()
 	{
