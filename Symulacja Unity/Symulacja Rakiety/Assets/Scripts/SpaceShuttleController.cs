@@ -13,8 +13,7 @@ public class SpaceShuttleController : MonoBehaviour
     public double massEngine;
     public double height = 0;
     public double velocity = 0;
-    public double acceleration = 0;
-    public float time;
+    public float time = 0;
     public List<Engine> engines;
 	public FuelTank externalTank;
     public Planet planet;
@@ -24,14 +23,8 @@ public class SpaceShuttleController : MonoBehaviour
     public double massALL = 0;
     public double massGassOut = 0;
     public double massGAssOutALL = 0;
-    public float myTime = 0;
-    public float maxTime = 4;
     public bool isEmpty = false;
 	public float time2=0;
-	public double a1;
-	public double a2;
-	public double a3;
-	public double a4;
 
     [SerializeField]
     private int _MainEnginesCount;
@@ -63,7 +56,7 @@ public class SpaceShuttleController : MonoBehaviour
 
     void Update()
     {
-		time += Time.deltaTime;
+		
         switch (state)
         {
             case SpaceShuttleState.Idle:
@@ -129,16 +122,13 @@ public class SpaceShuttleController : MonoBehaviour
 
     private void UpdateMath()
     {
+		time += Time.deltaTime;
         CalculateGravity(height);
 
         if (massGAssOutALL < externalTank.mainEngineFuelMass)
         {
 			time2 = Time.deltaTime ;
 
-			a1 = engines [0].ispSL;
-			a2 = massALL / (massALL - massGassOut * time2);
-				a3 = Math.Log(a2);
-				a4 = -gravity *time2 + a1*a3;
 			var xmas = massGassOut * time2;
 			massGAssOutALL += xmas;
 
@@ -154,7 +144,7 @@ public class SpaceShuttleController : MonoBehaviour
         else
         {
 			isEmpty = true;
-            Debug.Log("IIIIIIIIIIISSSSSSSSSSSSS  " + isEmpty);
+
             if (isEmpty)
             {
 				time2 = Time.deltaTime ;
@@ -162,8 +152,6 @@ public class SpaceShuttleController : MonoBehaviour
 				height = height + velocity * time2
 					- 0.5 * gravity * time2 * time2
 					+ engines [0].ispSL  *Math.Log ((massALL / (massALL - engines [0].MassTotal))) * time2;
-
-				Debug.Log("ZZERO");
 
 				//inna masa do odrzucenia i odejmuejmy masę zrzytego paliwa
 				massALL -= engines[0].MassTotal; //masa paliwa i modułu
@@ -175,24 +163,11 @@ public class SpaceShuttleController : MonoBehaviour
 				if (engines.Count > 0) {//trzeba policzyć na nowo prędkość wystrzeliwanego paliwa bo inny silnik
 					CalculateMassGassOut (engines [0]);
 				}
-				myTime = 0;
 				massGAssOutALL = 0;
             }
-
-            //rakieta musi odrzucić silnik
-          //  myTime += Time.deltaTime;
-          //  if (myTime >= maxTime)
-         //   {
-              
-
-
-          //  }
-
+				
         }
 
-
-
-    //    time += Time.deltaTime;
     }
 
     public void UpdateMathWithoutEngine()
