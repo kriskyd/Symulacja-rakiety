@@ -61,6 +61,7 @@ public class EngineEditor : MonoBehaviour
 		// engines list
 		ddMainEngines.ClearOptions ();
 		ddMainEngines.AddOptions (dMainEngines.Values.ToList ());
+		ddMainEngines.onValueChanged.AddListener (ChangeEngines);
 
 		// engines number
 		ddMainEnginesCount.ClearOptions ();
@@ -70,6 +71,7 @@ public class EngineEditor : MonoBehaviour
 		// srb list
 		ddSRBs.ClearOptions ();
 		ddSRBs.AddOptions (dSRBs.Values.ToList ());
+		ddSRBs.onValueChanged.AddListener (ChangeSRBs);
 
 		//srb number
 		ddSRBsCount.ClearOptions ();
@@ -84,6 +86,40 @@ public class EngineEditor : MonoBehaviour
 	void Update ()
 	{
 
+	}
+
+	void UpdateEngines ()
+	{
+		for (int i = 0; i < controller.engines.Count; i++)
+			Destroy (controller.engines [i].gameObject);
+		controller.engines.Clear ();
+
+		Vector3 distVec = Vector3.forward * 4f;
+		Vector3 rotVec = Vector3.zero;
+		rotVec.y = 360 / mec;
+		for (int i = 0; i < mec; i++)
+		{
+			distVec = Quaternion.Euler (rotVec) * distVec;
+			print (distVec);
+			controller.engines.Add (Instantiate (selectedEngine, controller.transform.position + distVec, Quaternion.identity, controller.transform).GetComponent<Engine> ());
+		}
+	}
+
+	void UpdateSRBs ()
+	{
+		for (int i = 0; i < controller.engineBusters.Count; i++)
+			Destroy (controller.engineBusters [i].gameObject);
+		controller.engineBusters.Clear ();
+
+		Vector3 distVec = Vector3.forward * 6.5f;
+		Vector3 rotVec = Vector3.zero;
+		rotVec.y = 360 / srbc;
+		for (int i = 0; i < srbc; i++)
+		{
+			distVec = Quaternion.Euler (rotVec) * distVec;
+			print (distVec);
+			controller.engineBusters.Add (Instantiate (selectedSRB, controller.transform.position + distVec, Quaternion.identity, controller.transform).GetComponent<Engine> ());
+		}
 	}
 
 	public void ChangeEngines (int index)
@@ -104,54 +140,36 @@ public class EngineEditor : MonoBehaviour
 				break;
 		}
 
-		for (int i=0; i < controller.engines.Count; i++)
-		{
-
-		}
+		UpdateEngines ();
 	}
 
 	public void ChangeSRBs (int index)
 	{
+		switch (dSRBs.Values.ElementAt (index))
+		{
+			case "4-segment":
+				selectedEngine = SRB4_segmentPrefab;
+				break;
+			case "5-segment":
+				selectedEngine = SRB5_segmentPrefab;
+				break;
+		}
 
+		UpdateSRBs ();
 	}
 
 	public void ChangeEnginesCount (int index)
 	{
 		mec = Convert.ToInt32 (dMainEnginesCount.Values.ElementAt (index));
 
-
-		for (int i = 0; i < controller.engines.Count; i++)
-			Destroy (controller.engines [i].gameObject);
-		controller.engines.Clear ();
-
-		Vector3 distVec = Vector3.forward * 4f;
-		Vector3 rotVec = Vector3.zero;
-		rotVec.y = 360 / mec;
-		for (int i = 0; i < mec; i++)
-		{
-			distVec = Quaternion.Euler (rotVec) * distVec;
-			print (distVec);
-			controller.engines.Add (Instantiate (selectedEngine, controller.transform.position + distVec, Quaternion.identity, controller.transform).GetComponent<Engine> ());
-		}
+		UpdateEngines ();
 	}
 
 	public void ChangeSRBsCount (int index)
 	{
 		srbc = Convert.ToInt32 (dSRBsCount.Values.ElementAt (index));
 
+		UpdateSRBs ();
 
-		for (int i = 0; i < controller.engineBusters.Count; i++)
-			Destroy (controller.engineBusters [i].gameObject);
-		controller.engineBusters.Clear ();
-
-		Vector3 distVec = Vector3.forward * 6.5f;
-		Vector3 rotVec = Vector3.zero;
-		rotVec.y = 360 / srbc;
-		for (int i = 0; i < srbc; i++)
-		{
-			distVec = Quaternion.Euler (rotVec) * distVec;
-			print (distVec);
-			controller.engineBusters.Add (Instantiate (selectedSRB, controller.transform.position + distVec, Quaternion.identity, controller.transform).GetComponent<Engine> ());
-		}
 	}
 }

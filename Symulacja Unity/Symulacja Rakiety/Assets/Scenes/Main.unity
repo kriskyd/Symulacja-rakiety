@@ -5956,12 +5956,18 @@ MonoBehaviour:
   ddMainEnginesCount: {fileID: 1270347107}
   ddSRBs: {fileID: 30601755}
   ddSRBsCount: {fileID: 496460657}
-  engineRD_170Prefab: {fileID: 0}
-  engineRD_180Prefab: {fileID: 0}
-  engineRS_25Prefab: {fileID: 0}
-  engineRS_25DPrefab: {fileID: 0}
-  SRB4_segmentPrefab: {fileID: 0}
-  SRB5_segmentPrefab: {fileID: 0}
+  engineRD_170Prefab: {fileID: 1536729889802928, guid: 38ada5716b9d1ad4da192743e60b609d,
+    type: 2}
+  engineRD_180Prefab: {fileID: 1536729889802928, guid: 38ada5716b9d1ad4da192743e60b609d,
+    type: 2}
+  engineRS_25Prefab: {fileID: 1536729889802928, guid: 38ada5716b9d1ad4da192743e60b609d,
+    type: 2}
+  engineRS_25DPrefab: {fileID: 1536729889802928, guid: 38ada5716b9d1ad4da192743e60b609d,
+    type: 2}
+  SRB4_segmentPrefab: {fileID: 1879015779255248, guid: 0dc53b6eb74a02944bf1f1db05ac88ae,
+    type: 2}
+  SRB5_segmentPrefab: {fileID: 1879015779255248, guid: 0dc53b6eb74a02944bf1f1db05ac88ae,
+    type: 2}
   selectedEngine: {fileID: 0}
   selectedSRB: {fileID: 0}
 --- !u!4 &1914104309 stripped
