@@ -27,7 +27,6 @@ public class SpaceShuttleController : MonoBehaviour
     public double massALL = 0;
     public double massGassOut = 0;
     public double massGAssOutALL = 0;
-	public double massGAssOutALLBuster = 0;
     public bool isEmpty = false;
 	public bool isEmptyBuster = false;
 	public float time2=0;
@@ -35,8 +34,8 @@ public class SpaceShuttleController : MonoBehaviour
 	//robienie z kilku silników jednego silniak
 	private Engine OneEngine;
 	private Engine OneEngineBusters; 
-	private double newIspSL = 0;
-	private double massOutBuser = 0;
+	public double newIspSL = 0;
+	public double massOutBuser = 0;
 	private bool isSeriouslyEmpty = false;
 
     [SerializeField]
@@ -241,12 +240,29 @@ public class SpaceShuttleController : MonoBehaviour
 
 
 		} else if(!isEmptyBuster){
-			
+
+
+//			time2 = Time.deltaTime ;
+//			velocity = -gravity * time2 + newIspSL * Math.Log((massALL / (massALL - OneEngineBusters.MassTotal)));
+//			height = height + velocity * time2
+//				- 0.5 * gravity * time2 * time2
+//				+ newIspSL  *Math.Log ((massALL / (massALL - OneEngineBusters.MassTotal))) * time2;
+
+			//inna masa do odrzucenia i odejmuejmy masę zrzytego paliwa
+			massALL -= OneEngineBusters.MassTotal; //masa paliwa i modułu
+
+			//trzeba policzyć na nowo prędkość wystrzeliwanego paliwa bo inny silnik
+			CalculateMassGassOut (OneEngine);
+
+			massGAssOutALL -= massOutBuser;
+
 			isEmptyBuster = true;
 
 		}
+			
 
-		if (isEmptyBuster == false && massGAssOutALL < externalTank.mainEngineFuelMass  )
+
+		if (isEmptyBuster == true && massGAssOutALL < externalTank.mainEngineFuelMass  )
         {
 			time2 = Time.deltaTime ;
 
@@ -260,46 +276,26 @@ public class SpaceShuttleController : MonoBehaviour
 				+ newIspSL* (time - massALL / massGassOut) * Math.Log (massALL / (massALL - massGassOut * time)));
 
         }
-		else if(!isEmpty)
+		else if(isEmptyBuster == true && !isEmpty)
         {
-			isEmpty = true;	
-        }
-
-
-		if (isEmptyBuster) {
-
-
 			time2 = Time.deltaTime ;
-			velocity = -gravity * time2 + newIspSL * Math.Log((massALL / (massALL - OneEngineBusters.MassTotal)));
-			height = height + velocity * time2
-				- 0.5 * gravity * time2 * time2
-				+ newIspSL  *Math.Log ((massALL / (massALL - OneEngineBusters.MassTotal))) * time2;
-
-			//inna masa do odrzucenia i odejmuejmy masę zrzytego paliwa
-			massALL -= OneEngineBusters.MassTotal; //masa paliwa i modułu
-
-			//trzeba policzyć na nowo prędkość wystrzeliwanego paliwa bo inny silnik
-			CalculateMassGassOut (OneEngine);
-
-			massGAssOutALL = 0;
-
-		}
-
-		else if (isEmptyBuster && isEmpty)
-		{
-			time2 = Time.deltaTime ;
-			velocity = -gravity * time2 +newIspSL * Math.Log((massALL / (massALL - OneEngine.MassTotal)));
-			height = height + velocity * time2
-				- 0.5 * gravity * time2 * time2
-				+ newIspSL  *Math.Log ((massALL / (massALL - OneEngine.MassTotal))) * time2;
+//			velocity = -gravity * time2 +newIspSL * Math.Log((massALL / (massALL - OneEngine.MassTotal)));
+//			height = height + velocity * time2
+//				- 0.5 * gravity * time2 * time2
+//				+ newIspSL  *Math.Log ((massALL / (massALL - OneEngine.MassTotal))) * time2;
 
 			//inna masa do odrzucenia i odejmuejmy masę zrzytego paliwa
 			massALL -= OneEngine.MassTotal; //masa paliwa i modułu
 
 			massGAssOutALL = 0;
 
+
+			isEmpty = true;	
+
 			isSeriouslyEmpty = true;
-		}
+        }
+
+
 
 
     }
