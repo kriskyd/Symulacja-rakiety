@@ -113,7 +113,7 @@ public class EngineEditor : MonoBehaviour
 
 		Vector3 distVec = Vector3.forward * 6.5f;
 		Vector3 rotVec = Vector3.zero;
-		rotVec.y = 360 / srbc;
+		rotVec.y = srbc == 0 ? 0 : 360 / srbc;
 		for (int i = 0; i < srbc; i++)
 		{
 			distVec = Quaternion.Euler (rotVec) * distVec;
@@ -170,6 +170,5 @@ public class EngineEditor : MonoBehaviour
 		srbc = Convert.ToInt32 (dSRBsCount.Values.ElementAt (index));
 
 		UpdateSRBs ();
-
 	}
 }
