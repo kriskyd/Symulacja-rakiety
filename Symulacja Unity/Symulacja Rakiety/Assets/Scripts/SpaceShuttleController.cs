@@ -7,7 +7,7 @@ public enum SpaceShuttleState { Idle, Started, Moving };
 
 public class SpaceShuttleController : MonoBehaviour
 {
-    public SpaceShuttleState state = SpaceShuttleState.Idle;
+    public static SpaceShuttleState state = SpaceShuttleState.Idle;
     public double force = 12500000;
     public double mass = 1000;
     public double massEngine;
@@ -28,7 +28,7 @@ public class SpaceShuttleController : MonoBehaviour
     public double massGassOut = 0;
     public double massGAssOutALL = 0;
     public bool isEmpty = false;
-	public bool isEmptyBuster = false;
+	public static bool isEmptyBuster = false;
 	public float time2=0;
 
 	//robienie z kilku silników jednego silniak
@@ -219,7 +219,7 @@ public class SpaceShuttleController : MonoBehaviour
 
     private void UpdateMath()
     {
-		time += Time.deltaTime;
+		
         CalculateGravity(height);
 
 		if (isEmptyBuster == false &&  massOutBuser < OneEngineBusters.fuelMass) {
@@ -234,12 +234,15 @@ public class SpaceShuttleController : MonoBehaviour
 
 			velocity = -gravity * time2 + newIspSL * Math.Log (massALL / (massALL - massGAssOutALL));
 
-			height = (newIspSL * time
-				- 0.5 * gravity * time * time
-				+ newIspSL* (time - massALL / massGassOut) * Math.Log (massALL / (massALL - massGassOut * time)));
+            height += newIspSL * time2 - 0.5f * gravity * time2 * time2 - gravity * time2 * time + velocity * time2 +
+                + newIspSL * (time + time2 - massALL / massGassOut) * Math.Log(massALL / (massALL - massGassOut * (time2 + time)))
+                - newIspSL * (time - massALL / massGassOut) * Math.Log(massALL / (massALL - massGassOut * time));
+
+            //Debug.Log("pierwszy logarytm: " + Math.Log(massALL / (massALL - massGAssOutALL)));
+            //Debug.Log("drugi logarytm: " + Math.Log(massALL / (massALL - massGassOut * time)));
 
 
-		} else if(!isEmptyBuster){
+        } else if(!isEmptyBuster){
 
 
 //			time2 = Time.deltaTime ;
@@ -249,12 +252,15 @@ public class SpaceShuttleController : MonoBehaviour
 //				+ newIspSL  *Math.Log ((massALL / (massALL - OneEngineBusters.MassTotal))) * time2;
 
 			//inna masa do odrzucenia i odejmuejmy masę zrzytego paliwa
-			massALL -= OneEngineBusters.MassTotal; //masa paliwa i modułu
+			//massALL -= OneEngineBusters.MassTotal; //masa paliwa i modułu
 
 			//trzeba policzyć na nowo prędkość wystrzeliwanego paliwa bo inny silnik
 			CalculateMassGassOut (OneEngine);
 
-			massGAssOutALL -= massOutBuser;
+            massGAssOutALL += OneEngineBusters.mass;
+
+            if (massGAssOutALL < externalTank.mainEngineFuelMass + OneEngineBusters.MassTotal)
+                Debug.Log("TAKK");
 
 			isEmptyBuster = true;
 
@@ -262,7 +268,7 @@ public class SpaceShuttleController : MonoBehaviour
 			
 
 
-		if (isEmptyBuster == true && massGAssOutALL < externalTank.mainEngineFuelMass  )
+		if (isEmptyBuster == true && massGAssOutALL < externalTank.mainEngineFuelMass + OneEngineBusters.MassTotal  )
         {
 			time2 = Time.deltaTime ;
 
@@ -271,9 +277,25 @@ public class SpaceShuttleController : MonoBehaviour
 
 			velocity = -gravity * time2 + newIspSL * Math.Log (massALL / (massALL - massGAssOutALL));
 
-			height = (newIspSL * time
-				- 0.5 * gravity * time * time
-				+ newIspSL* (time - massALL / massGassOut) * Math.Log (massALL / (massALL - massGassOut * time)));
+
+
+            //height = (newIspSL * time
+            //	- 0.5 * gravity * time * time
+            //	+ newIspSL* (time - massALL / massGassOut) * Math.Log (massALL / (massALL - massGassOut * time)));
+            Debug.Log(height);
+
+            height += newIspSL * time2 - 0.5f * gravity * time2 * time2 - gravity * time2 * time + velocity * time2 +
+               + newIspSL * (time + time2 - massALL / massGassOut) * Math.Log(massALL / (massALL - massGassOut * (time2 + time)))
+               - newIspSL * (time - massALL / massGassOut) * Math.Log(massALL / (massALL - massGassOut * time));
+
+
+            //height = (newIspSL * time
+            //                - 0.5 * gravity * time * time
+            //                + newIspSL * (time - massALL / massGassOut) * Math.Log(massALL / (massALL - massGAssOutALL)));
+            //Debug.Log(height);
+            //Debug.Log("22222 bez busterów");
+            //Debug.Log("2222 pierwszy logarytm: " + Math.Log(massALL / (massALL - massGAssOutALL)));
+            //Debug.Log("2222 drugi logarytm: " + Math.Log(massALL / (massALL - massGAssOutALL)));
 
         }
 		else if(isEmptyBuster == true && !isEmpty)
@@ -285,7 +307,7 @@ public class SpaceShuttleController : MonoBehaviour
 //				+ newIspSL  *Math.Log ((massALL / (massALL - OneEngine.MassTotal))) * time2;
 
 			//inna masa do odrzucenia i odejmuejmy masę zrzytego paliwa
-			massALL -= OneEngine.MassTotal; //masa paliwa i modułu
+			//massALL -= OneEngine.MassTotal; //masa paliwa i modułu
 
 			massGAssOutALL = 0;
 
@@ -295,7 +317,7 @@ public class SpaceShuttleController : MonoBehaviour
 			isSeriouslyEmpty = true;
         }
 
-
+        time += Time.deltaTime;
 
 
     }
