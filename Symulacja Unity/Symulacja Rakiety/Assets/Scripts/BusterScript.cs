@@ -33,8 +33,15 @@ public class BusterScript : MonoBehaviour {
         if(SpaceShuttleController.isEmptyBuster)
         {
 
+            CalculateGravity(height);
+            this.transform.SetParent(null);
+
+
+
             height += -0.5 * gravity * Time.deltaTime * Time.deltaTime;
             velocity += gravity * Time.deltaTime;
+
+            UpdatePosition();
         }
 
 

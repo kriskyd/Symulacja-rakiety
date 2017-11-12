@@ -261,8 +261,8 @@ public class SpaceShuttleController : MonoBehaviour
 
             if (massGAssOutALL < externalTank.mainEngineFuelMass + OneEngineBusters.MassTotal)
                 Debug.Log("TAKK");
-
-			isEmptyBuster = true;
+            BusterScript.SetHeight(height, velocity);
+            isEmptyBuster = true;
 
 		}
 			
@@ -282,7 +282,7 @@ public class SpaceShuttleController : MonoBehaviour
             //height = (newIspSL * time
             //	- 0.5 * gravity * time * time
             //	+ newIspSL* (time - massALL / massGassOut) * Math.Log (massALL / (massALL - massGassOut * time)));
-            Debug.Log(height);
+            //Debug.Log(height);
 
             height += newIspSL * time2 - 0.5f * gravity * time2 * time2 - gravity * time2 * time + velocity * time2 +
                + newIspSL * (time + time2 - massALL / massGassOut) * Math.Log(massALL / (massALL - massGassOut * (time2 + time)))
