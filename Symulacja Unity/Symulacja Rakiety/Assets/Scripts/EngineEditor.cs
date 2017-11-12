@@ -11,6 +11,7 @@ public class EngineEditor : MonoBehaviour
 	public UnityEngine.UI.Dropdown ddMainEnginesCount;
 	public UnityEngine.UI.Dropdown ddSRBs;
 	public UnityEngine.UI.Dropdown ddSRBsCount;
+	public UnityEngine.UI.Dropdown ddPlanets;
 
 	public GameObject engineRD_170Prefab;
 	public GameObject engineRD_180Prefab;
@@ -18,8 +19,10 @@ public class EngineEditor : MonoBehaviour
 	public GameObject engineRS_25DPrefab;
 	public GameObject SRB4_segmentPrefab;
 	public GameObject SRB5_segmentPrefab;
+	public List<GameObject> planets;
 	public GameObject selectedEngine;
 	public GameObject selectedSRB;
+	public GameObject selectedPlanet;
 
 	private int mec = 1, srbc = 0;
 
@@ -51,35 +54,60 @@ public class EngineEditor : MonoBehaviour
 		{0, "0"},
 		{1, "2"},
 		{2, "3"},
-		{3, "4"}
+		{3, "4"},
+		{4, "5"},
+	};
+
+	private readonly Dictionary<int, string> dPlanets = new Dictionary<int, string> ()
+	{
+		{0, "Hermes"},
+		{1, "Afrodyta"},
+		{2, "Gaja"},
+		{3, "Luna"},
+		{4, "Ares"},
+		{5, "Zeus"},
+		{6, "Kronos"},
+		{7, "Uranos"},
+		{8, "Posejdon"}
 	};
 
 	void Start ()
 	{
 		controller = FindObjectOfType<SpaceShuttleController> ();
+		selectedEngine = engineRS_25Prefab;
+		selectedSRB = SRB4_segmentPrefab;
+		selectedPlanet = planets [2];
 
 		// engines list
 		ddMainEngines.ClearOptions ();
 		ddMainEngines.AddOptions (dMainEngines.Values.ToList ());
 		ddMainEngines.onValueChanged.AddListener (ChangeEngines);
+		ddMainEngines.value = 2;
 
 		// engines number
 		ddMainEnginesCount.ClearOptions ();
 		ddMainEnginesCount.AddOptions (dMainEnginesCount.Values.ToList ());
 		ddMainEnginesCount.onValueChanged.AddListener (ChangeEnginesCount);
+		ddMainEnginesCount.value = 3;
 
 		// srb list
 		ddSRBs.ClearOptions ();
 		ddSRBs.AddOptions (dSRBs.Values.ToList ());
 		ddSRBs.onValueChanged.AddListener (ChangeSRBs);
+		ddSRBs.value = 0;
 
 		//srb number
 		ddSRBsCount.ClearOptions ();
 		ddSRBsCount.AddOptions (dSRBsCount.Values.ToList ());
 		ddSRBsCount.onValueChanged.AddListener (ChangeSRBsCount);
+		ddSRBsCount.value = 1;
 
-		selectedEngine = engineRD_170Prefab;
-		selectedSRB = SRB4_segmentPrefab;
+		// planets
+		ddPlanets.ClearOptions ();
+		ddPlanets.AddOptions (dPlanets.Values.ToList ());
+		ddPlanets.onValueChanged.AddListener (ChangePlanet);
+		ddPlanets.value = 2;
+
 
 	}
 
@@ -170,5 +198,12 @@ public class EngineEditor : MonoBehaviour
 		srbc = Convert.ToInt32 (dSRBsCount.Values.ElementAt (index));
 
 		UpdateSRBs ();
+	}
+
+	public void ChangePlanet (int index)
+	{
+		selectedPlanet = planets [index];
+
+		controller.planet = selectedPlanet.GetComponent<Planet> ();
 	}
 }
