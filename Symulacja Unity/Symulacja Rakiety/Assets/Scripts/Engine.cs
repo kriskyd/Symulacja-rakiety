@@ -39,26 +39,18 @@ public class Engine : RocketPart
 	void Update ()
 	{
 
-        if (SpaceShuttleController.state == SpaceShuttleState.Started)
-        {
-
-            planet = controller.planet;
-            planet.CalculateAllMassANDRadius();
-        }
-
 
         if (SpaceShuttleController.isEmptyBuster && SpaceShuttleController.isEmpty)
         {
-
-            CalculateGravity(height);
-            this.transform.SetParent(null);
-
-
-            velocity += gravity * Time.deltaTime;
-            height += -0.5 * gravity * Time.deltaTime * Time.deltaTime - velocity * Time.deltaTime;
            
+            if (this.gameObject.GetComponent<Rigidbody>() != null)
+            {
+                this.transform.SetParent(null);
+                this.gameObject.AddComponent<Rigidbody>();
+                this.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, (float)velocity, 0);
+                this.gameObject.GetComponent<Rigidbody>().mass = (float)this.MassTotal;
+            }
 
-            UpdatePosition();
         }
 
     }
@@ -69,15 +61,6 @@ public class Engine : RocketPart
         velocity = V0;
     }
 
-    private void CalculateGravity(double height)
-    {
-        gravity = (SpaceShuttleController.G * planet.MASS) / ((planet.RADIUS + height) * (planet.RADIUS + height));
-    }
-
-    private void UpdatePosition()
-    {
-        transform.position = Vector3.up * (float)height;
-    }
 
     public override string ToString ()
 	{
