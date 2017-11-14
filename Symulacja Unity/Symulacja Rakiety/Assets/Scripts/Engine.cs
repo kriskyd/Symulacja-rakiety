@@ -16,12 +16,21 @@ public class Engine : RocketPart
 
 	public double fuelMass;
 	public double MassTotal { get { return fuelMass + mass; } }
-	
 
-	void Start ()
+    public double gravity;
+    public static double height;
+    public static double velocity;
+    private Planet planet;
+    private SpaceShuttleController controller;
+
+
+
+    void Start ()
 	{
 
-		if (ispVac == 0)
+        controller = FindObjectOfType<SpaceShuttleController>();
+
+        if (ispVac == 0)
 			ispVac = ispSL;
 		if (thrustVac == 0)
 			thrustVac = thrustSL;
@@ -30,9 +39,47 @@ public class Engine : RocketPart
 	void Update ()
 	{
 
-	}
+        if (SpaceShuttleController.state == SpaceShuttleState.Started)
+        {
 
-	 public override string ToString ()
+            planet = controller.planet;
+            planet.CalculateAllMassANDRadius();
+        }
+
+
+        if (SpaceShuttleController.isEmptyBuster && SpaceShuttleController.isEmpty)
+        {
+
+            CalculateGravity(height);
+            this.transform.SetParent(null);
+
+
+            velocity += gravity * Time.deltaTime;
+            height += -0.5 * gravity * Time.deltaTime * Time.deltaTime - velocity * Time.deltaTime;
+           
+
+            UpdatePosition();
+        }
+
+    }
+
+    public static void SetHeight(double H0, double V0)
+    {
+        height = H0;
+        velocity = V0;
+    }
+
+    private void CalculateGravity(double height)
+    {
+        gravity = (SpaceShuttleController.G * planet.MASS) / ((planet.RADIUS + height) * (planet.RADIUS + height));
+    }
+
+    private void UpdatePosition()
+    {
+        transform.position = Vector3.up * (float)height;
+    }
+
+    public override string ToString ()
 	{
 		object[] args = new object[] {  MassTotal.ToString(), fuelMass.ToString(), mass.ToString(), ispSL.ToString(), ispVac.ToString(), thrustVac.ToString(), thrustSL.ToString()  };
 		string result =  System.String.Format("[Engine: MassTotal={0}, MassFuel = {1}, mass ={2},  ispSL ={3}, ispVac = {4}, thrustVac = {5}, thrustSL= {6}]", args );
@@ -40,14 +87,4 @@ public class Engine : RocketPart
 		return result.ToString();
 	}
 
-//	public override string ToString ()
-//	{
-//
-//		string result =  "[Engine: MassTotal=" + MassTotal.ToString() + ", MassFuel = " + fuelMass.ToString() +
-//			" mass = " + mass.ToString() + "ispSL = "+ ispSL.ToString()+ " ispVac = " + ispVac.ToString() + 
-//			"thrustVac = " + thrustVac.ToString() +" thrustSL= " + thrustSL.ToString() + "]";
-//		//MassTotal.ToString(), fuelMass.ToString(), mass.ToString(), ispSL.ToString(), ispVac.ToString(), thrustVac.ToString(), thrustSL.ToString());  
-//
-//		return result.ToString();
-//	}
 }

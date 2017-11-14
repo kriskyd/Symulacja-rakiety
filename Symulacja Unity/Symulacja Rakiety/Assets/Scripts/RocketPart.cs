@@ -12,9 +12,10 @@ public class RocketPart : MonoBehaviour
 	void Start ()
 	{
 
-	}
+        
+    }
 
-	void Update ()
+    void Update ()
 	{
 
 	}

@@ -27,7 +27,7 @@ public class SpaceShuttleController : MonoBehaviour
     public double massALL = 0;
     public double massGassOut = 0;
     public double massGAssOutALL = 0;
-    public bool isEmpty = false;
+    public static bool isEmpty = false;
 	public static bool isEmptyBuster = false;
 	public float time2=0;
 
@@ -315,6 +315,7 @@ public class SpaceShuttleController : MonoBehaviour
 			isEmpty = true;	
 
 			isSeriouslyEmpty = true;
+            Engine.SetHeight(height, velocity);
         }
 
         time += Time.deltaTime;

@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BusterScript : MonoBehaviour {
-
-
-    SpaceShuttleController controller;
+public class BusterScript : RocketPart
+{
+    private SpaceShuttleController controller;
 
     public double gravity;
     public static double height;
@@ -37,9 +36,9 @@ public class BusterScript : MonoBehaviour {
             this.transform.SetParent(null);
 
 
-
-            height += -0.5 * gravity * Time.deltaTime * Time.deltaTime;
             velocity += gravity * Time.deltaTime;
+            height += -0.5 * gravity * Time.deltaTime * Time.deltaTime - velocity * Time.deltaTime;
+            
 
             UpdatePosition();
         }
