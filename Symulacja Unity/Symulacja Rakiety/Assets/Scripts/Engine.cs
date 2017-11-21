@@ -43,7 +43,7 @@ public class Engine : RocketPart
         if (SpaceShuttleController.isEmptyBuster && SpaceShuttleController.isEmpty)
         {
            
-            if (this.gameObject.GetComponent<Rigidbody>() != null)
+            if (this.gameObject.GetComponent<Rigidbody>() == null)
             {
                 this.transform.SetParent(null);
                 this.gameObject.AddComponent<Rigidbody>();
