@@ -24,8 +24,9 @@ public class BusterScript : RocketPart
         if(SpaceShuttleController.isEmptyBuster)
         {
 
-            if (this.gameObject.GetComponent<Rigidbody>() != null)
+            if (this.gameObject.GetComponent<Rigidbody>() == null)
             {
+
                 this.transform.SetParent(null);
                 this.gameObject.AddComponent<Rigidbody>();
                 this.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, (float)velocity, 0);
