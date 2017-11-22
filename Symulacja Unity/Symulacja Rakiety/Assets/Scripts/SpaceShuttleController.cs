@@ -61,6 +61,8 @@ public class SpaceShuttleController : MonoBehaviour
         }
     }
 
+	EngineEditor editor;
+
     void Start()
     {
 		OneEngine = new Engine ();
@@ -72,7 +74,8 @@ public class SpaceShuttleController : MonoBehaviour
 		OneEngineBusters.mass = 0;
 		OneEngineBusters.fuelMass = 0;
 
-
+		editor = FindObjectOfType<EngineEditor> ();
+		editor.DoInit (this);
     }
 
     void Update()

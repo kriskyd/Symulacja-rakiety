@@ -71,9 +71,9 @@ public class EngineEditor : MonoBehaviour
 		{8, "Posejdon"}
 	};
 
-	void Start ()
+	public void DoInit (SpaceShuttleController ssc)
 	{
-		controller = FindObjectOfType<SpaceShuttleController> ();
+		controller = ssc;
 		selectedEngine = engineRS_25Prefab;
 		selectedSRB = SRB4_segmentPrefab;
 		selectedPlanet = planets [2];
@@ -118,8 +118,10 @@ public class EngineEditor : MonoBehaviour
 
 	void UpdateEngines ()
 	{
-		for (int i = 0; i < controller.engines.Count; i++)
-			Destroy (controller.engines [i].gameObject);
+		if (controller)
+			for (int i = 0; i < controller.engines.Count; i++)
+				if (controller.engines [i] != null)
+					Destroy (controller.engines [i].gameObject);
 		controller.engines.Clear ();
 
 		Vector3 distVec = Vector3.forward * 4f;

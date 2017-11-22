@@ -1,0 +1,212 @@
+fileFormatVersion: 2
+guid: 4fde3e466dece14409497d8961faec26
+timeCreated: 1511364805
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: et_all.lay
+    400000: //RootNode
+    400002: et_all.lay
+    2300000: et_all.lay
+    3300000: et_all.lay
+    4300000: et_all.lay
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: et all
+    second: {fileID: 2100000, guid: 531e7710cc27c054e960fddcb3f1c2e8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: et_attach_bar
+    second: {fileID: 2100000, guid: 9cbfb467e8f87f844b4cc0b4a81b4132, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: et_attach_barbo1
+    second: {fileID: 2100000, guid: bb7fdaf9225328644ab8699f1a89dc17, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: et_attach_barbot
+    second: {fileID: 2100000, guid: 33bc9a2101dbf334b9ba99be5bea5ee1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: et_attach_bartop
+    second: {fileID: 2100000, guid: 927dd23382bcc0f4fb43da03223b3e9e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: et_attach_sideba
+    second: {fileID: 2100000, guid: 5636d02d0eda58e44932a52c83534bc8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: et_attach_sidepa
+    second: {fileID: 2100000, guid: dac159b672cd4e44397edce859444a15, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: et_attach_srbs
+    second: {fileID: 2100000, guid: 0e81ae975292e95448f382b03c51fbd7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: et_attach_tube
+    second: {fileID: 2100000, guid: 3a122ca4e2b8fb5429487bee50d13ed8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: et_attach_tube2
+    second: {fileID: 2100000, guid: 954e003d6b881494f9e02beecf18bb9a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: et_attach_tubend
+    second: {fileID: 2100000, guid: 32130572cb6742e4b9a03588c0ac5f43, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: et_bot_cir
+    second: {fileID: 2100000, guid: 16d19787d4f2f414ca5703b52e7be434, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: et_shutsup_bars
+    second: {fileID: 2100000, guid: 0333e54cdf050aa469480f55b05e4454, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: et_shutsup_boxs
+    second: {fileID: 2100000, guid: df8182c67fafffc4d803ada5f3bc3a43, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: et_shutsup_sideb
+    second: {fileID: 2100000, guid: 2ff0b3ad4d55174478072bb44366d575, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: et_supline_curv
+    second: {fileID: 2100000, guid: 8fe54ecc659e7db488338bf962fb4dec, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: et_supline_endca
+    second: {fileID: 2100000, guid: fcd226a0274542841a161cbafbacaa28, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: et_supline_main
+    second: {fileID: 2100000, guid: f08ce949e02b58241b9124edb4438287, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: et_supline_seps
+    second: {fileID: 2100000, guid: 115e743adda1e7147999a3e52980feb2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: et_supline_side
+    second: {fileID: 2100000, guid: b2177883fd0033047b1e89402b5511a5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: et_supline_top
+    second: {fileID: 2100000, guid: aa2e214d7a75a744bba93408fc81eb88, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: et_top_nose
+    second: {fileID: 2100000, guid: 960c251c8f9bfec47a65e7c4977741b5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: et_top_nose2
+    second: {fileID: 2100000, guid: c780704902aacd0459d46fcb18324515, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: et_top_tip
+    second: {fileID: 2100000, guid: 95362909497d71543ab375a60967cadc, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

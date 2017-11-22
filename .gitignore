@@ -32,3 +32,5 @@ ExportedObj/
 # Builds
 /**/*.apk
 /**/*.unitypackage
+
+/**/Modele*

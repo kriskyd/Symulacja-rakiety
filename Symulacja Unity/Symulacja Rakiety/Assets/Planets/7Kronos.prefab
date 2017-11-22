@@ -9,30 +9,30 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1278665506506586}
+  m_RootGameObject: {fileID: 1203107876648424}
   m_IsPrefabParent: 1
---- !u!1 &1278665506506586
+--- !u!1 &1203107876648424
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4444296530874960}
-  - component: {fileID: 114112688692488590}
+  - component: {fileID: 4847351387270056}
+  - component: {fileID: 114989182188670508}
   m_Layer: 0
-  m_Name: Ares
+  m_Name: 7Kronos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4444296530874960
+--- !u!4 &4847351387270056
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1278665506506586}
+  m_GameObject: {fileID: 1203107876648424}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -40,18 +40,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114112688692488590
+--- !u!114 &114989182188670508
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1278665506506586}
+  m_GameObject: {fileID: 1203107876648424}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6cd3e21c24a93748ac26564106634dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  massPlanet: 6.4171
-  powerMass10: 24
-  raudiusPlanet: 3389.5
+  massPlanet: 5.6834
+  powerMass10: 26
+  raudiusPlanet: 58232
   powerRaudius10: 3
