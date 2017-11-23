@@ -71,6 +71,10 @@ public class EngineEditor : MonoBehaviour
 		{8, "Posejdon"}
 	};
 
+	public List<Vector3> enginePositions;
+	private List<Vector3> currentEnginesPositions = new List<Vector3> ();
+
+
 	public void DoInit (SpaceShuttleController ssc)
 	{
 		controller = ssc;
@@ -118,20 +122,46 @@ public class EngineEditor : MonoBehaviour
 
 	void UpdateEngines ()
 	{
+		currentEnginesPositions.Clear ();
+		switch (mec)
+		{
+			case 1:
+				currentEnginesPositions.Add (enginePositions [2]);
+				break;
+			case 2:
+				currentEnginesPositions.Add (enginePositions [3]);
+				currentEnginesPositions.Add (enginePositions [4]);
+				break;
+			case 3:
+				currentEnginesPositions.Add (enginePositions [2]);
+				currentEnginesPositions.Add (enginePositions [3]);
+				currentEnginesPositions.Add (enginePositions [4]);
+				break;
+			case 4:
+				currentEnginesPositions.Add (enginePositions [0]);
+				currentEnginesPositions.Add (enginePositions [1]);
+				currentEnginesPositions.Add (enginePositions [3]);
+				currentEnginesPositions.Add (enginePositions [4]);
+				break;
+			case 5:
+				currentEnginesPositions.Add (enginePositions [0]);
+				currentEnginesPositions.Add (enginePositions [1]);
+				currentEnginesPositions.Add (enginePositions [2]);
+				currentEnginesPositions.Add (enginePositions [3]);
+				currentEnginesPositions.Add (enginePositions [4]);
+				break;
+		}
+
 		if (controller)
 			for (int i = 0; i < controller.engines.Count; i++)
 				if (controller.engines [i] != null)
 					Destroy (controller.engines [i].gameObject);
 		controller.engines.Clear ();
 
-		Vector3 distVec = Vector3.forward * 4f;
-		Vector3 rotVec = Vector3.zero;
-		rotVec.y = 360 / mec;
+
 		for (int i = 0; i < mec; i++)
 		{
-			distVec = Quaternion.Euler (rotVec) * distVec;
-			print (distVec);
-			controller.engines.Add (Instantiate (selectedEngine, controller.transform.position + distVec, Quaternion.identity, controller.transform).GetComponent<Engine> ());
+			controller.engines.Add (Instantiate (selectedEngine, currentEnginesPositions [i], selectedEngine.transform.rotation, controller.transform).GetComponent<Engine> ());
 		}
 	}
 
@@ -141,14 +171,44 @@ public class EngineEditor : MonoBehaviour
 			Destroy (controller.engineBusters [i].gameObject);
 		controller.engineBusters.Clear ();
 
-		Vector3 distVec = Vector3.forward * 6.5f;
-		Vector3 rotVec = Vector3.zero;
-		rotVec.y = srbc == 0 ? 0 : 360 / srbc;
+		if (srbc == 0)
+			return;
+
+		Vector3 rotVec = new Vector3 ();
+		switch (srbc)
+		{
+			case 2:
+				rotVec.y = 90f;
+				break;
+			case 3:
+				rotVec.y = 75f;
+				break;
+			case 4:
+				rotVec.y = 90f;
+				break;
+			case 5:
+				rotVec.y = 75f;
+				break;
+		}
+
 		for (int i = 0; i < srbc; i++)
 		{
-			distVec = Quaternion.Euler (rotVec) * distVec;
-			print (distVec);
-			controller.engineBusters.Add (Instantiate (selectedSRB, controller.transform.position + distVec, Quaternion.identity, controller.transform).GetComponent<Engine> ());
+			controller.engineBusters.Add (Instantiate (selectedSRB, Vector3.zero, Quaternion.Euler(rotVec), controller.transform).GetComponent<Engine> ());
+			switch (srbc)
+			{
+				case 2:
+					rotVec.y += 180f;
+					break;
+				case 3:
+					rotVec.y += 105f;
+					break;
+				case 4:
+					rotVec.y += 60f;
+					break;
+				case 5:
+					rotVec.y += 52.5f;
+					break;
+			}
 		}
 	}
 
