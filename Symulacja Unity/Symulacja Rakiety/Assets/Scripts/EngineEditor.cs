@@ -77,6 +77,12 @@ public class EngineEditor : MonoBehaviour
 
 	public void DoInit (SpaceShuttleController ssc)
 	{
+		enginePositions.Clear ();
+		for (int i=0; i < ssc.engines.Count; i++)
+		{
+			enginePositions.Add (ssc.engines [i].transform.position);
+		}
+
 		controller = ssc;
 		selectedEngine = engineRS_25Prefab;
 		selectedSRB = SRB4_segmentPrefab;
@@ -193,7 +199,7 @@ public class EngineEditor : MonoBehaviour
 
 		for (int i = 0; i < srbc; i++)
 		{
-			controller.engineBusters.Add (Instantiate (selectedSRB, Vector3.zero, Quaternion.Euler(rotVec), controller.transform).GetComponent<Engine> ());
+			controller.engineBusters.Add (Instantiate (selectedSRB, Vector3.zero, Quaternion.Euler (rotVec), controller.transform).GetComponent<Engine> ());
 			switch (srbc)
 			{
 				case 2:
