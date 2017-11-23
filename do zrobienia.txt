@@ -1,0 +1,12 @@
+﻿1. koniec symulacji gdy rakieta leci w dół
+2. modele planet
+3. particle ognia
+4. odpadające boostery za szybko spadają
+5. sprawdzenie matematyki czy czegokolwiek bo PALIWO NIE MOŻE SIĘ TAK SZYBKO KOŃCZYĆ
+5.1 ewentualnie zużywać go mniej, bo why not
+6. prezentacja
+7. sprawozdanie
+8. dodać info o silnikach i locie wahadłowca do GUI
+9. dodać reset symulacji
+10. zaprogramować kamerę
+11. dodać układ słoneczny i przesuwać się między nimi z kamerą
