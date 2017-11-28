@@ -274,4 +274,15 @@ public class EngineEditor : MonoBehaviour
 
 		controller.planet = selectedPlanet.GetComponent<Planet> ();
 	}
+
+    public void ChangePlanetByOla(int index)
+    {
+        selectedPlanet = planets[index];
+
+        controller.planet = selectedPlanet.GetComponent<Planet>();
+        ddPlanets.value = index;
+
+    }
+
+
 }
