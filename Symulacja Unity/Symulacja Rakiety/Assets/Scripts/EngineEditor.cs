@@ -122,6 +122,11 @@ public class EngineEditor : MonoBehaviour
 
 	}
 
+	void Update ()
+	{
+
+	}
+
 	void UpdateEngines ()
 	{
 		currentEnginesPositions.Clear ();
@@ -274,5 +279,14 @@ public class EngineEditor : MonoBehaviour
 	public void Reset ()
 	{
 		SceneManager.LoadScene (SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+	}
+
+	public void ChangePlanetByOla (int index)
+	{
+		selectedPlanet = planets [index];
+
+		controller.planet = selectedPlanet.GetComponent<Planet> ();
+		ddPlanets.value = index;
+
 	}
 }

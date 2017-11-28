@@ -11,6 +11,9 @@ public class BusterScript : RocketPart
     public static double velocity;
     private Planet planet;
 
+    float time = 0;
+    float maxTime = 2f;
+
 
 
 	// Use this for initialization
@@ -31,6 +34,16 @@ public class BusterScript : RocketPart
                 this.gameObject.AddComponent<Rigidbody>();
                 this.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, (float)velocity, 0);
                 this.gameObject.GetComponent<Rigidbody>().mass = (float)this.GetComponent<Engine>().MassTotal;
+            }
+
+
+            if(time < maxTime)
+            {
+                time += Time.deltaTime; 
+            }
+            else
+            {
+                Destroy(this.gameObject);
             }
 
         }
