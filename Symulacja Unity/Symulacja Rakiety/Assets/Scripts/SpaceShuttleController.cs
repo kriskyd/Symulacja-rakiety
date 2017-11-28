@@ -164,13 +164,13 @@ public class SpaceShuttleController : MonoBehaviour
 
     private void GetIdleInput()
     {
-        print(OneEngine.ToString());
-        Debug.Log(OneEngineBusters.ToString());
+        //print(OneEngine.ToString());
+        //Debug.Log(OneEngineBusters.ToString());
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            print(OneEngine.ToString());
-            Debug.Log(OneEngineBusters.ToString());
+            //print(OneEngine.ToString());
+            //Debug.Log(OneEngineBusters.ToString());
 
 
             //jeden silnik na dole
@@ -202,8 +202,8 @@ public class SpaceShuttleController : MonoBehaviour
             CalculateIspForEngine(OneEngineBusters, engineBusters);
 
 
-            print(OneEngine.ToString());
-            Debug.Log(OneEngineBusters.ToString());
+            //print(OneEngine.ToString());
+            //Debug.Log(OneEngineBusters.ToString());
 
 
             //oblicznie nowego Isp oraz ile masy pozbywa się w danym momecie

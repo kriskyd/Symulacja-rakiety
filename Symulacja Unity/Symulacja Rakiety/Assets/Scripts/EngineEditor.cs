@@ -13,6 +13,9 @@ public class EngineEditor : MonoBehaviour
 	public UnityEngine.UI.Dropdown ddSRBs;
 	public UnityEngine.UI.Dropdown ddSRBsCount;
 	public UnityEngine.UI.Dropdown ddPlanets;
+	public UnityEngine.UI.Text tVelocity;
+	public UnityEngine.UI.Text tHeight;
+	public UnityEngine.UI.Text tTime;
 
 	public GameObject engineRD_170Prefab;
 	public GameObject engineRD_180Prefab;
@@ -124,7 +127,9 @@ public class EngineEditor : MonoBehaviour
 
 	void Update ()
 	{
-
+		tVelocity.text = controller.velocity.ToString("0.#");
+		tHeight.text = (controller.height * 0.001).ToString ("0.##");
+		tTime.text = controller.time.ToString ("0.#");
 	}
 
 	void UpdateEngines ()
@@ -289,4 +294,6 @@ public class EngineEditor : MonoBehaviour
 		ddPlanets.value = index;
 
 	}
+
+
 }
