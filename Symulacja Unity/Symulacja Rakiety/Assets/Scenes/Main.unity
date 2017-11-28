@@ -987,7 +987,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.8143382, b: 0.25735295, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -8311,6 +8311,7 @@ MonoBehaviour:
   tHeight: {fileID: 1817043666}
   tTime: {fileID: 605409956}
   panelPlanet: {fileID: 149184551}
+  panelTime: {fileID: 769871867}
   engineRD_170Prefab: {fileID: 1536729889802928, guid: 38ada5716b9d1ad4da192743e60b609d,
     type: 2}
   engineRD_180Prefab: {fileID: 1776152147570668, guid: a3768a46b54093f42a7cf981bab5e142,

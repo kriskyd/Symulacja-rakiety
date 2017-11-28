@@ -17,6 +17,7 @@ public class EngineEditor : MonoBehaviour
 	public UnityEngine.UI.Text tHeight;
 	public UnityEngine.UI.Text tTime;
 	public GameObject panelPlanet;
+	public GameObject panelTime;
 
 	public GameObject engineRD_170Prefab;
 	public GameObject engineRD_180Prefab;
@@ -313,5 +314,13 @@ public class EngineEditor : MonoBehaviour
 	public void ChangeTimeScale (float timeScale)
 	{
 		Time.timeScale = timeScale;
+		List<UnityEngine.UI.Button> timeButtons = panelTime.GetComponentsInChildren<UnityEngine.UI.Button> ().ToList ();
+		for(int i=0; i < timeButtons.Count; i++)
+		{
+			timeButtons [i].GetComponent<UnityEngine.UI.Image> ().color = Color.white;
+		}
+		timeButtons [Convert.ToInt32 (timeScale) - 1].GetComponent<UnityEngine.UI.Image> ().color = Color.yellow;
+		//button.image.color = new Color (255, 208, 66);
+		print (timeButtons [Convert.ToInt32 (timeScale) - 1]);
 	}
 }
