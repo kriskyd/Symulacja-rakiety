@@ -122,6 +122,12 @@ public class SpaceShuttleController : MonoBehaviour
                 break;
         }
 
+		if (height < 0f)
+		{
+			print ("Power too low!");
+			//height = 0f;
+		}
+
     }
 
     private void CalculateGravity(double height)

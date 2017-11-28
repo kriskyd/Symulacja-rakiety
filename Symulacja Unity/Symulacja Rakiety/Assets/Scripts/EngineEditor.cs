@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class EngineEditor : MonoBehaviour
 {
@@ -118,11 +119,6 @@ public class EngineEditor : MonoBehaviour
 		ddPlanets.onValueChanged.AddListener (ChangePlanet);
 		ddPlanets.value = 2;
 
-
-	}
-
-	void Update ()
-	{
 
 	}
 
@@ -273,5 +269,10 @@ public class EngineEditor : MonoBehaviour
 		selectedPlanet = planets [index];
 
 		controller.planet = selectedPlanet.GetComponent<Planet> ();
+	}
+
+	public void Reset ()
+	{
+		SceneManager.LoadScene (SceneManager.GetActiveScene().name, LoadSceneMode.Single);
 	}
 }
