@@ -1,12 +1,6 @@
 ﻿1. koniec symulacji gdy rakieta leci w dół
-2. modele planet
+	2. modele planet
 3. particle ognia
-
-5. sprawdzenie matematyki czy czegokolwiek bo PALIWO NIE MOŻE SIĘ TAK SZYBKO KOŃCZYĆ
-5.1 ewentualnie zużywać go mniej, bo why not
-6. prezentacja
-7. sprawozdanie
-
+	6. prezentacja
+	7. sprawozdanie
 9. dodać reset symulacji
-
-11. dodać układ słoneczny i przesuwać się między nimi z kamerą
