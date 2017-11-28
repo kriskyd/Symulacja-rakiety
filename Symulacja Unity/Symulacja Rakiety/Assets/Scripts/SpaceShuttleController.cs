@@ -186,13 +186,29 @@ public class SpaceShuttleController : MonoBehaviour
             OneEngine.fuelMass = externalTank.mainEngineFuelMass;
 
 
-            //jeden silnk buster
-            foreach (Engine buster in engineBusters)
+            if (engineBusters.Count == 0)
             {
-                OneEngineBusters.fuelMass += buster.fuelMass;
-                OneEngineBusters.mass += buster.mass;
-                OneEngineBusters.thrustSL += buster.thrustSL;
-                OneEngineBusters.thrustVac += buster.thrustVac;
+                engineBusters.Add(new Engine()
+                {
+                    ispSL = 1,
+                    ispVac = 1,
+                    thrustSL = 1,
+                    thrustVac = 1,
+                    fuelMass = 1
+                });
+            }
+            else
+            {
+
+
+                //jeden silnk buster
+                foreach (Engine buster in engineBusters)
+                {
+                    OneEngineBusters.fuelMass += buster.fuelMass;
+                    OneEngineBusters.mass += buster.mass;
+                    OneEngineBusters.thrustSL += buster.thrustSL;
+                    OneEngineBusters.thrustVac += buster.thrustVac;
+                }
             }
             OneEngineBusters.engineType = engineBusters[0].engineType;
             OneEngineBusters.fuelType = engineBusters[0].fuelType;
@@ -293,7 +309,7 @@ public class SpaceShuttleController : MonoBehaviour
 
             if (massGAssOutALL < externalTank.mainEngineFuelMass + OneEngineBusters.MassTotal)
                 Debug.Log("TAKK");
-            BusterScript.SetHeight(height, velocity);
+            BusterScript.SetHeight(height, velocity, this.gameObject.transform.position);
             Physics.gravity = new Vector3(0, (float)gravity, 0);
             isEmptyBuster = true;
 
