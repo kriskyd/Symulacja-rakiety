@@ -16,6 +16,7 @@ public class EngineEditor : MonoBehaviour
 	public UnityEngine.UI.Text tVelocity;
 	public UnityEngine.UI.Text tHeight;
 	public UnityEngine.UI.Text tTime;
+	public GameObject panelPlanet;
 
 	public GameObject engineRD_170Prefab;
 	public GameObject engineRD_180Prefab;
@@ -295,5 +296,22 @@ public class EngineEditor : MonoBehaviour
 
 	}
 
+	public void SetUIEnabled (bool enabled)
+	{
+		ddMainEngines.enabled = enabled;
+		ddMainEnginesCount.enabled = enabled;
+		ddPlanets.enabled = enabled;
+		ddSRBs.enabled = enabled;
+		ddSRBsCount.enabled = enabled;
+		List<UnityEngine.UI.Button> planetButtons = panelPlanet.GetComponentsInChildren<UnityEngine.UI.Button> ().ToList ();
+		foreach (UnityEngine.UI.Button b in planetButtons)
+		{
+			b.enabled = enabled;
+		}
+	}
 
+	public void ChangeTimeScale (float timeScale)
+	{
+		Time.timeScale = timeScale;
+	}
 }

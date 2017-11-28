@@ -6,7 +6,9 @@
 5.1 ewentualnie zużywać go mniej, bo why not
 6. prezentacja
 7. sprawozdanie
-8. dodać info o silnikach i locie wahadłowca do GUI
+
 9. dodać reset symulacji
-done 10. zaprogramować kamerę
+
 11. dodać układ słoneczny i przesuwać się między nimi z kamerą
+
+14. nie można odpalić rakiety bez boosterów
