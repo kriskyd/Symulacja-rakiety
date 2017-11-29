@@ -7,6 +7,7 @@ public enum SpaceShuttleState { Idle, Started, Moving };
 
 public class SpaceShuttleController : MonoBehaviour
 {
+	public static SpaceShuttleController Current;
     public static SpaceShuttleState state = SpaceShuttleState.Idle;
     public double force = 12500000;
     public double mass = 1000;
@@ -65,6 +66,7 @@ public class SpaceShuttleController : MonoBehaviour
 
     void Start()
     {
+		Current = this;
         OneEngine = new Engine();
         OneEngineBusters = new Engine();
 
@@ -104,8 +106,11 @@ public class SpaceShuttleController : MonoBehaviour
                 GetIdleInput();
                 break;
             case SpaceShuttleState.Started:
+				foreach (Engine engine in engines)
+					engine.flameThrower.SetActive (true);
+
 				foreach (Engine booster in engineBusters)
-					booster.GetComponent<BusterScript> ().FlameThrower.SetActive (true);
+					booster.flameThrower.SetActive (true);
                 state = SpaceShuttleState.Moving;
                 break;
 
@@ -309,11 +314,15 @@ public class SpaceShuttleController : MonoBehaviour
 
             massGAssOutALL += OneEngineBusters.mass;
 
-            if (massGAssOutALL < externalTank.mainEngineFuelMass + OneEngineBusters.MassTotal)
-                Debug.Log("TAKK");
+			if (massGAssOutALL < externalTank.mainEngineFuelMass + OneEngineBusters.MassTotal)
+			{
+				Debug.Log ("TAKK");
+			}
             BusterScript.SetHeight(height, velocity, this.gameObject.transform.position);
             Physics.gravity = new Vector3(0, (float)gravity, 0);
-            isEmptyBuster = true;
+			foreach (Engine booster in engineBusters)
+				Destroy (booster.flameThrower);
+			isEmptyBuster = true;
            
         }
 

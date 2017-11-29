@@ -12,7 +12,6 @@ public class BusterScript : RocketPart
     public static Vector3 positionRakiet;
     private Planet planet;
     private Vector3  calulateDirection;
-	public GameObject FlameThrower;
     float time = 0;
     float maxTime = 10f;
 

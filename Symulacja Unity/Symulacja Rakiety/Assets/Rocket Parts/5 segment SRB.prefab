@@ -407,7 +407,6 @@ MonoBehaviour:
   mass: 0
   info: 
   gravity: 0
-  FlameThrower: {fileID: 1850717973641048}
 --- !u!114 &114698702161522872
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -430,6 +429,7 @@ MonoBehaviour:
   thrustSL: 16000000
   fuelMass: 625000
   gravity: 0
+  flameThrower: {fileID: 1850717973641048}
 --- !u!198 &198136734878500902
 ParticleSystem:
   m_ObjectHideFlags: 1

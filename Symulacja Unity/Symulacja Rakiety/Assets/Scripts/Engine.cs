@@ -23,7 +23,7 @@ public class Engine : RocketPart
     private Planet planet;
     private SpaceShuttleController controller;
 
-
+	public GameObject flameThrower;
 
     void Start ()
 	{
