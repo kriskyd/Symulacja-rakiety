@@ -314,7 +314,7 @@ public class SpaceShuttleController : MonoBehaviour
             BusterScript.SetHeight(height, velocity, this.gameObject.transform.position);
             Physics.gravity = new Vector3(0, (float)gravity, 0);
             isEmptyBuster = true;
-
+           
         }
 
 
@@ -324,7 +324,7 @@ public class SpaceShuttleController : MonoBehaviour
             time2 = Time.deltaTime;
 
             var xmas = massGassOut * time2;
-            massGAssOutALL += xmas;
+            massGAssOutALL += xmas/10;
 
             velocity = -gravity * time2 + newIspSL * Math.Log(massALL / (massALL - massGAssOutALL));
 
