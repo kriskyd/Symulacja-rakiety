@@ -25,7 +25,8 @@ public class CameraController : MonoBehaviour
 
 		float zoom = Input.GetAxis ("Mouse ScrollWheel") * zoomSpeed;
 		Vector3 direction =  (camera.transform.position - transform.position).normalized;
-		camera.transform.Translate (-zoom * direction , Space.World);
+		if ((camera.transform.position - zoom * direction).x > 25f)
+			camera.transform.Translate (-zoom * direction , Space.World);
 
 		if (Input.GetMouseButton (1))
 		{
@@ -34,6 +35,10 @@ public class CameraController : MonoBehaviour
 			pitch += Input.GetAxis ("Mouse Y") * 10f;
 
 			transform.eulerAngles = new Vector3 (0, yaw, -pitch);
+		}
+		if (Input.GetMouseButton (0))
+		{
+			transform.position -= Vector3.up * Input.GetAxis ("Mouse Y") * 10f;
 		}
 		//camera.transform.LookAt (transform);
 	}

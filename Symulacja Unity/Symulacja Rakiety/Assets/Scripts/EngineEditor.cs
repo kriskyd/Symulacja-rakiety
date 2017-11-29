@@ -80,6 +80,14 @@ public class EngineEditor : MonoBehaviour
 	public List<Vector3> enginePositions;
 	private List<Vector3> currentEnginesPositions = new List<Vector3> ();
 
+	public void DoStart ()
+	{
+		enginePositions.Clear ();
+		for (int i=0; i < SpaceShuttleController.Current.engines.Count; i++)
+		{
+			enginePositions.Add (SpaceShuttleController.Current.engines [i].transform.position);
+		}
+	}
 
 	public void DoInit (SpaceShuttleController ssc)
 	{
@@ -87,11 +95,6 @@ public class EngineEditor : MonoBehaviour
 		selectedPlanet = null;
 		selectedSRB = null;
 
-		enginePositions.Clear ();
-		for (int i=0; i < ssc.engines.Count; i++)
-		{
-			enginePositions.Add (ssc.engines [i].transform.position);
-		}
 
 		controller = ssc;
 		selectedEngine = engineRS_25Prefab;
