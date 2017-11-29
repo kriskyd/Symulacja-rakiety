@@ -80,6 +80,34 @@ public class SpaceShuttleController : MonoBehaviour
 		editor.DoInit (this);
     }
 
+	public void Reset ()
+	{
+		state = SpaceShuttleState.Idle;
+		height = 0f;
+		velocity = 0f;
+		time = 0f;
+		isEmpty = false;
+		isEmptyBuster = false;
+	    gravity = 0;
+		massALL = 0;
+	    massGassOut = 0;
+		massGAssOutALL = 0;
+		transform.position = Vector3.zero;
+
+
+		OneEngine = new Engine ();
+		OneEngineBusters = new Engine ();
+
+		OneEngine.mass = 0;
+		OneEngine.fuelMass = 0;
+
+		OneEngineBusters.mass = 0;
+		OneEngineBusters.fuelMass = 0;
+
+		editor = FindObjectOfType<EngineEditor> ();
+		editor.DoInit (this);
+	}
+
     void Update()
     {
 
@@ -107,10 +135,12 @@ public class SpaceShuttleController : MonoBehaviour
                 break;
             case SpaceShuttleState.Started:
 				foreach (Engine engine in engines)
-					engine.flameThrower.SetActive (true);
+					if (engine.flameThrower != null)
+						engine.flameThrower.SetActive (true);
 
 				foreach (Engine booster in engineBusters)
-					booster.flameThrower.SetActive (true);
+					if (booster.flameThrower != null)
+						booster.flameThrower.SetActive (true);
                 state = SpaceShuttleState.Moving;
                 break;
 
@@ -321,7 +351,11 @@ public class SpaceShuttleController : MonoBehaviour
             BusterScript.SetHeight(height, velocity, this.gameObject.transform.position);
             Physics.gravity = new Vector3(0, (float)gravity, 0);
 			foreach (Engine booster in engineBusters)
-				Destroy (booster.flameThrower);
+			{
+				if (booster.flameThrower != null)
+					Destroy (booster.flameThrower);
+				booster.GetComponent<Rigidbody> ().isKinematic = false;
+			}
 			isEmptyBuster = true;
            
         }

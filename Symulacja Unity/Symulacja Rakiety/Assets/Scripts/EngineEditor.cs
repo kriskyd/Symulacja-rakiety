@@ -83,6 +83,10 @@ public class EngineEditor : MonoBehaviour
 
 	public void DoInit (SpaceShuttleController ssc)
 	{
+		selectedEngine = null;
+		selectedPlanet = null;
+		selectedSRB = null;
+
 		enginePositions.Clear ();
 		for (int i=0; i < ssc.engines.Count; i++)
 		{
@@ -98,30 +102,35 @@ public class EngineEditor : MonoBehaviour
 		ddMainEngines.ClearOptions ();
 		ddMainEngines.AddOptions (dMainEngines.Values.ToList ());
 		ddMainEngines.onValueChanged.AddListener (ChangeEngines);
+		ddMainEngines.value = 1;
 		ddMainEngines.value = 2;
 
 		// engines number
 		ddMainEnginesCount.ClearOptions ();
 		ddMainEnginesCount.AddOptions (dMainEnginesCount.Values.ToList ());
 		ddMainEnginesCount.onValueChanged.AddListener (ChangeEnginesCount);
+		ddMainEnginesCount.value = 2;
 		ddMainEnginesCount.value = 3;
 
 		// srb list
 		ddSRBs.ClearOptions ();
 		ddSRBs.AddOptions (dSRBs.Values.ToList ());
 		ddSRBs.onValueChanged.AddListener (ChangeSRBs);
+		ddSRBs.value = 1;
 		ddSRBs.value = 0;
 
 		//srb number
 		ddSRBsCount.ClearOptions ();
 		ddSRBsCount.AddOptions (dSRBsCount.Values.ToList ());
 		ddSRBsCount.onValueChanged.AddListener (ChangeSRBsCount);
+		ddSRBsCount.value = 0;
 		ddSRBsCount.value = 1;
 
 		// planets
 		ddPlanets.ClearOptions ();
 		ddPlanets.AddOptions (dPlanets.Values.ToList ());
 		ddPlanets.onValueChanged.AddListener (ChangePlanet);
+		ddPlanets.value = 1;
 		ddPlanets.value = 2;
 
 
@@ -319,8 +328,6 @@ public class EngineEditor : MonoBehaviour
 		{
 			timeButtons [i].GetComponent<UnityEngine.UI.Image> ().color = Color.white;
 		}
-		timeButtons [Convert.ToInt32 (timeScale) - 1].GetComponent<UnityEngine.UI.Image> ().color = Color.yellow;
-		//button.image.color = new Color (255, 208, 66);
-		print (timeButtons [Convert.ToInt32 (timeScale) - 1]);
+		timeButtons [Convert.ToInt32 (timeScale)].GetComponent<UnityEngine.UI.Image> ().color = Color.yellow;
 	}
 }
