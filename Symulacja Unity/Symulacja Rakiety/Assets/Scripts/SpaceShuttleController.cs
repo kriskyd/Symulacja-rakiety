@@ -104,6 +104,8 @@ public class SpaceShuttleController : MonoBehaviour
                 GetIdleInput();
                 break;
             case SpaceShuttleState.Started:
+				foreach (Engine booster in engineBusters)
+					booster.GetComponent<BusterScript> ().FlameThrower.SetActive (true);
                 state = SpaceShuttleState.Moving;
                 break;
 
