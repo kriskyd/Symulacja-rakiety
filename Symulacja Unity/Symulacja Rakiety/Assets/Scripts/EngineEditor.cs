@@ -264,10 +264,10 @@ public class EngineEditor : MonoBehaviour
 		switch (dSRBs.Values.ElementAt (index))
 		{
 			case "4-segment":
-				selectedEngine = SRB4_segmentPrefab;
+				selectedSRB = SRB4_segmentPrefab;
 				break;
 			case "5-segment":
-				selectedEngine = SRB5_segmentPrefab;
+				selectedSRB = SRB5_segmentPrefab;
 				break;
 		}
 
