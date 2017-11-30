@@ -30,12 +30,11 @@ public class CameraController : MonoBehaviour
 
 		if (Input.GetMouseButton (1))
 		{
-
 			yaw += Input.GetAxis ("Mouse X") * 10f;
 			pitch += Input.GetAxis ("Mouse Y") * 10f;
-
-			transform.eulerAngles = new Vector3 (0, yaw, -pitch);
 		}
+		transform.eulerAngles = new Vector3 (0, yaw, -pitch);
+
 		if (Input.GetMouseButton (0))
 		{
 			transform.position -= Vector3.up * Input.GetAxis ("Mouse Y") * 10f;
