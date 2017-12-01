@@ -300,7 +300,13 @@ public class EngineEditor : MonoBehaviour
 		selectedPlanet = planets [index];
 
 		controller.planet = selectedPlanet.GetComponent<Planet> ();
-	}
+        mats = Plane.GetComponent<Renderer>().sharedMaterials;
+        material = planets[index].GetComponent<MeshRenderer>().sharedMaterials[0];
+
+        mats[0] = material;
+
+        Plane.GetComponent<Renderer>().materials = mats;
+    }
 
 	public void Reset ()
 	{
@@ -313,13 +319,11 @@ public class EngineEditor : MonoBehaviour
 
 		controller.planet = selectedPlanet.GetComponent<Planet> ();
 		ddPlanets.value = index;
-        Debug.Log(Plane.GetComponent<MeshRenderer>().sharedMaterials[0]);
-        Debug.Log(planets[index].GetComponent<MeshRenderer>().sharedMaterials[0]);
+
 
         mats = Plane.GetComponent<Renderer>().sharedMaterials;
         material = planets[index].GetComponent<MeshRenderer>().sharedMaterials[0];
 
-        Debug.Log(mats.Count());
         mats[0] = material;
 
         Plane.GetComponent<Renderer>().materials = mats;
