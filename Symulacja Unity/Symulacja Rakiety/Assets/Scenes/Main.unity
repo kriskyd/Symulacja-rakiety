@@ -1928,7 +1928,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 49d1ef95669e70141bfb1f4345be29a0, type: 2}
+  - {fileID: 2100000, guid: 4544d8bafd940c54a95c0529bdabc1b1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1977,7 +1977,7 @@ Transform:
   m_GameObject: {fileID: 471887276}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 100, y: 1, z: 100}
+  m_LocalScale: {x: 2500, y: 1, z: 2500}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -7601,7 +7601,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 10000
-  field of view: 60
+  field of view: 57.4
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -9495,6 +9495,7 @@ MonoBehaviour:
   selectedEngine: {fileID: 0}
   selectedSRB: {fileID: 0}
   selectedPlanet: {fileID: 0}
+  Plane: {fileID: 471887276}
   enginePositions:
   - {x: 367, y: 291, z: -78}
   - {x: 367, y: 291, z: 78}
@@ -9899,7 +9900,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &1955104543
 Animator:
   serializedVersion: 3

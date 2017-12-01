@@ -30,6 +30,8 @@ public class EngineEditor : MonoBehaviour
 	public GameObject selectedSRB;
 	public GameObject selectedPlanet;
 
+    public GameObject Plane;
+
 	private int mec = 1, srbc = 0;
 
 	private readonly Dictionary<int, string> dMainEngines = new Dictionary<int, string> ()
@@ -77,7 +79,12 @@ public class EngineEditor : MonoBehaviour
 		{8, "Posejdon"}
 	};
 
-	public List<Vector3> enginePositions;
+
+    private Material[] mats;
+    private Material material;
+
+
+    public List<Vector3> enginePositions;
 	private List<Vector3> currentEnginesPositions = new List<Vector3> ();
 
 	public void DoStart ()
@@ -306,8 +313,20 @@ public class EngineEditor : MonoBehaviour
 
 		controller.planet = selectedPlanet.GetComponent<Planet> ();
 		ddPlanets.value = index;
+        Debug.Log(Plane.GetComponent<MeshRenderer>().sharedMaterials[0]);
+        Debug.Log(planets[index].GetComponent<MeshRenderer>().sharedMaterials[0]);
 
-	}
+        mats = Plane.GetComponent<Renderer>().sharedMaterials;
+        material = planets[index].GetComponent<MeshRenderer>().sharedMaterials[0];
+
+        Debug.Log(mats.Count());
+        mats[0] = material;
+
+        Plane.GetComponent<Renderer>().materials = mats;
+
+        //= planets[index].GetComponent<Renderer>().sharedMaterials[0];
+
+    }
 
 	public void SetUIEnabled (bool enabled)
 	{
