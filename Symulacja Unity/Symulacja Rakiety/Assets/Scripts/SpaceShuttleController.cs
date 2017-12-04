@@ -210,7 +210,7 @@ public class SpaceShuttleController : MonoBehaviour
         {
             //print(OneEngine.ToString());
             //Debug.Log(OneEngineBusters.ToString());
-			editor.SetUIEnabled (false);
+			//editor.SetUIEnabled (false);
 
             //jeden silnik na dole
             foreach (Engine engine in engines)
