@@ -111,8 +111,8 @@ public class SpaceShuttleController : MonoBehaviour
 
     void Update()
     {
-		float rocketRotation = -time * 0.4f > -80f ? -time * 0.4f : -80f;
-		transform.parent.eulerAngles = new Vector3 (0f, 0f, rocketRotation);
+		//float rocketRotation = -time * 0.4f > -80f ? -time * 0.4f : -80f;
+		//transform.parent.eulerAngles = new Vector3 (0f, 0f, rocketRotation);
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             Time.timeScale = 1f;
