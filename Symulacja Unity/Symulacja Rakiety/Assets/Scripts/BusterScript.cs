@@ -37,7 +37,7 @@ public class BusterScript : RocketPart
 
             if (this.gameObject.GetComponent<Rigidbody>() == null)
             {
-                UnityEditor.EditorApplication.isPaused = true;
+                //UnityEditor.EditorApplication.isPaused = true;
                 this.transform.SetParent(null);
                 this.gameObject.AddComponent<Rigidbody>();
                 this.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(calulateDirection.x * 30, (float)velocity *1.17f, calulateDirection.z* 30);
