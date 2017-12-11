@@ -148,7 +148,7 @@ public class EngineEditor : MonoBehaviour
 
 	void Update ()
 	{
-		tVelocity.text = controller.velocity.ToString("0.#");
+		tVelocity.text = controller.myVelocity.ToString("0.#");
 		tHeight.text = (controller.height * 0.001).ToString ("0.##");
 		tTime.text = controller.time.ToString ("0.#");
 	}

@@ -15,6 +15,9 @@ public class SpaceShuttleController : MonoBehaviour
     public double height = 0;
     public double velocity = 0;
     public float time = 0;
+	public float myVelocity;
+	public float dH1, dH2;
+	public Vector3 startPosition;
 
     public List<Engine> engines;
     public List<Engine> engineBusters;
@@ -67,6 +70,7 @@ public class SpaceShuttleController : MonoBehaviour
     void Start()
     {
 		Current = this;
+		startPosition = transform.position;
         OneEngine = new Engine();
         OneEngineBusters = new Engine();
 
@@ -93,7 +97,7 @@ public class SpaceShuttleController : MonoBehaviour
 		massALL = 0;
 	    massGassOut = 0;
 		massGAssOutALL = 0;
-		transform.position = Vector3.zero;
+		transform.position = startPosition;
 
 
 		OneEngine = new Engine ();
@@ -160,12 +164,18 @@ public class SpaceShuttleController : MonoBehaviour
                 }
                 break;
         }
-
 		if (height < 0f)
 		{
 			print ("Power too low!");
-			//height = 0f;
+			transform.position = startPosition;
+			height = 0f;
 		}
+		dH1 = dH2;
+		dH2 = (float) height;
+		if (time2 != 0f)
+			myVelocity = (dH2 - dH1) / time2;
+		else
+			myVelocity = 0f;
 
     }
 
