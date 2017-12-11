@@ -34,6 +34,9 @@ public class SpaceShuttleController : MonoBehaviour
     public static bool isEmpty = false;
     public static bool isEmptyBuster = false;
     public float time2 = 0;
+    bool nieLeci = false;
+    float timeToReset = 5f;
+    double startHeight;
 
     //robienie z kilku silników jednego silniak
     private Engine OneEngine;
@@ -79,6 +82,7 @@ public class SpaceShuttleController : MonoBehaviour
 
         OneEngineBusters.mass = 0;
         OneEngineBusters.fuelMass = 0;
+        startHeight = transform.position.y;
 
 		editor = FindObjectOfType<EngineEditor> ();
 		editor.DoStart ();
@@ -176,6 +180,32 @@ public class SpaceShuttleController : MonoBehaviour
 			myVelocity = (dH2 - dH1) / time2;
 		else
 			myVelocity = 0f;
+
+        if (nieLeci)
+        {
+            timeToReset -= Time.deltaTime;
+            height = startHeight;
+            if (timeToReset < 0f)
+            {
+                //editor.Reset();
+                velocity = 0;
+                height = startHeight;
+                time = 0;
+                Time.timeScale = 0;
+                nieLeci = false;
+                timeToReset = 5f;
+                foreach (Engine engine in engines)
+                    if (engine.flameThrower != null)
+                        engine.flameThrower.SetActive(false);
+
+                foreach (Engine booster in engineBusters)
+                    if (booster.flameThrower != null)
+                        booster.flameThrower.SetActive(false);
+
+            }
+
+        }
+
 
     }
 
@@ -364,9 +394,12 @@ public class SpaceShuttleController : MonoBehaviour
             Physics.gravity = new Vector3(0, (float)gravity, 0);
 			foreach (Engine booster in engineBusters)
 			{
-				if (booster.flameThrower != null)
-					Destroy (booster.flameThrower);
-				booster.GetComponent<Rigidbody> ().isKinematic = false;
+                if (booster != null)
+                {
+                    if (booster.flameThrower != null)
+                        Destroy(booster.flameThrower);
+                    booster.GetComponent<Rigidbody>().isKinematic = false;
+                }
 			}
 			isEmptyBuster = true;
            
@@ -442,6 +475,7 @@ public class SpaceShuttleController : MonoBehaviour
 
     private void UpdatePosition()
     {
+        if (height >= startHeight)
         transform.position = Vector3.up * (float)height;
     }
 
